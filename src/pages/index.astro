@@ -1,11 +1,36 @@
 ---
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const projects = ["Temperance Alley Garden", "Speech Therapy Treasure Hunt", "Blue Marble Nursery", "Pets of New York (PONY)"];
 ---
 
 <Layout>
-	<Welcome />
+	<div class="flex flex-col gap-8">
+		<nav class="py-4 border-b-2">
+			<ol class="flex flex-row gap-8 items-center">
+				<li class="text-3xl">bespoken.studio</li>
+				<li>about</li>
+				<li>projects</li>
+				<li>
+					<button class="outline bg-black text-white font-bold rounded-2xl px-3 py-2 cursor-pointer hover:bg-black/75">book consultation</button>
+				</li>
+			</ol>
+		</nav>
+		<h3 class="text-2xl">say goodbye to boring, cookie-cutter landing pages. you deserve a website that tells your unique story.</h3>
+		<h4 class="text-xl">bespoken.studio is a digital agency focused on helping small businesses build their online brand. in an age where creativity and code are increasingly automated and standardized, we believe in upholding the artisinal aspect of building a website.</h4>
+
+		<h2>Current Projects</h2>
+		<section class="flex flex-row gap-4 w-full justify-between">
+			{projects.map(project => (
+				<div>
+					<div class="bg-gray-400 size-40">Thumbnail</div>
+					<p>{project}</p>
+				</div>
+			))}
+		</section>
+	</div>
 </Layout>
