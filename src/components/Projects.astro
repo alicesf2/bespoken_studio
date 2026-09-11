@@ -1,0 +1,23 @@
+---
+const { projects } = Astro.props;
+
+interface Project {
+    name: string;
+    description: string;
+}
+---
+
+<section class="-ml-12 flex h-180 w-screen flex-col gap-8 bg-[#636B2F] p-12">
+    <h3 class="pt-4 text-3xl font-bold text-[#D4DE95]">Projects</h3>
+
+    <div class="grid grid-cols-3 gap-4">
+        {projects.map((project: Project) => (
+            <div class="
+              flex h-35 flex-col items-center justify-center rounded-2xl
+              bg-[#3D4127]
+            ">
+                <h3 class="text-3xl text-[#D4DE95]">{project.name}</h3>
+            </div>
+        ))}
+    </div>
+</section>

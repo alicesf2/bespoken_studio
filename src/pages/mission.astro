@@ -21,10 +21,10 @@ const pillars = [
 
 <Layout>
     <section class="flex flex-col space-y-8">
-        <h4 class="text-xl text-center">bespoken's mission is to build tech that fosters community, encourages creativity, and spreads awareness of the good work people do every day.</h4>
-        <h4 class="text-xl text-center">our work upholds three pillars:</h4>
+        <h4 class="text-center text-xl">bespoken's mission is to build tech that fosters community, encourages creativity, and spreads awareness of the good work people do every day.</h4>
+        <h4 class="text-center text-xl">our work upholds three pillars:</h4>
 
-        <div class="flex flex-row gap-20 justify-center">
+        <!-- <div class="flex flex-row gap-20 justify-center">
             {pillars.map(pillar => (
                 <div class="flex flex-col gap-4 w-45">
                     <div class="h-60 border-8 flex justify-center items-center rounded-2xl">
@@ -34,6 +34,59 @@ const pillars = [
                     <p>{pillar.description}</p>
                 </div>
             ))}
+        </div> -->
+        <div class="container flex w-full flex-row justify-center gap-12">
+            {pillars.map(pillar => (
+                <div class="tile flex items-center justify-center">
+                    <p class="text-[80px]">{pillar.character}</p>
+                </div>
+            ))}
         </div>
     </section>
 </Layout>
+
+<style>
+    .container {
+        font-size: 200%;
+        position: relative;
+    }
+    .tile {
+        /* font-family: serif; */
+        font-family: "游明朝","Yu Mincho",YuMincho,"Hiragino Mincho ProN","Hiragino Mincho Pro","HGS明朝E",メイリオ,Meiryo,serif;
+        font-weight: bold;
+        box-sizing: border-box;
+        width: 4.5em;
+        height: 5.5em;
+        line-height: 2em;
+        text-align: center;
+        background: #f8f8f8;
+        border-radius: 0.2em;
+        border: 1px solid #999;
+        position: relative;
+        box-shadow: 0.1em 0.1em 0px 0px #999, 0.2em 0.2em 0px 0px #963;
+        cursor: pointer;
+        user-select: none;
+        pointer-events: auto;
+        color: #333;
+        padding-left: 2px;
+        text-shadow: -1px 0px 0px #000, 1px 1px 0px #fff;
+    }
+    .tile:after,.tile:before {
+        position: absolute;
+        content: '';
+        width: 0.1em;
+        height: 0.1em;
+        background: #963;
+        z-index: -1;
+    }
+    .tile:after {
+        top:-1px;right:0;
+        transform-origin: top right;
+        transform: scale(1.4) rotate(-45deg);
+    }
+    .tile:before {
+        bottom:0;left:-1px;
+        transform-origin: bottom left;
+        transform: scale(1.4) rotate(45deg);
+    }
+</style>

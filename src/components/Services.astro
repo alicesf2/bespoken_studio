@@ -5,47 +5,49 @@
   <h3>scroll down</h3>
 </section> -->
 <section class="
-  section pin-section flex h-[600px] w-full items-center justify-center
-  border-y-2 border-dashed border-(--color-surface50)
+  section pin-section my-0 -ml-12 h-180 w-screen bg-[#2C3015] p-12
 ">
-  <div class="content relative mx-auto flex w-full max-w-300 px-2.5">
-    <ul class="
-      list m-0 grow-0 list-none p-0 pr-2.5 text-[30px]
-      text-(--color-surface-white)
-    ">
-      <li>Design</li>
-      <li>Website Development</li>
-      <li>SEO & Analytics</li>
-      <li>Interactive Storytelling</li>
-    </ul>
-    <div class="fill absolute top-0 left-0 h-full w-[2px] bg-green-700"></div>
-    <div class="right relative grow">
-      <div class="
-        slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
-        rounded-[10px] opacity-0
-      ">
-        <img class="w-full max-w-[300px]" src="https://assets.codepen.io/16327/portrait-number-01.png" alt="" />
-      </div>
-      <div class="
-        slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
-        rounded-[10px] opacity-0
-      ">
-        <img class="w-full max-w-[300px]" src="https://assets.codepen.io/16327/portrait-number-02.png" alt="" />
-      </div>
-      <div class="
-        slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
-        rounded-[10px] opacity-0
-      ">
-        <img class="w-full max-w-[300px]" src="https://assets.codepen.io/16327/portrait-number-03.png" alt="" />
-      </div>
-      <div class="
-        slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
-        rounded-[10px] opacity-0
-      ">
-        <img class="w-full max-w-[300px]" src="https://assets.codepen.io/16327/portrait-number-04.png" alt="" />
-      </div>
+    <h3 class="pt-4 text-3xl font-semibold text-[#D4DE95]">What services do we provide?</h3>
+    <div class="flex h-150 w-full items-center justify-center">
+    <div class="content relative mx-auto flex w-full max-w-300 px-2.5">
+        <ul class="
+          list m-0 grow-0 list-none p-0 pr-2.5 text-[30px]
+          text-(--color-surface-white)
+        ">
+        <li>Design</li>
+        <li>Website Development</li>
+        <li>SEO & Analytics</li>
+        <li>Interactive Storytelling</li>
+        </ul>
+        <div class="fill absolute top-0 left-0 h-full w-0.5 bg-[#D4DE95]"></div>
+        <div class="right relative grow">
+        <div class="
+          slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
+          rounded-[10px] opacity-0
+        ">
+            <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-01.png" alt="" />
+        </div>
+        <div class="
+          slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
+          rounded-[10px] opacity-0
+        ">
+            <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-02.png" alt="" />
+        </div>
+        <div class="
+          slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
+          rounded-[10px] opacity-0
+        ">
+            <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-03.png" alt="" />
+        </div>
+        <div class="
+          slide center invisible absolute top-1/2 right-4 w-1/2 -translate-y-1/2
+          rounded-[10px] opacity-0
+        ">
+            <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-04.png" alt="" />
+        </div>
+        </div>
     </div>
-  </div>
+    </div>
 </section>
 <section class="section"></section>
 
@@ -68,11 +70,10 @@
     scrollTrigger: {
         trigger: ".pin-section",
         start: "top 150px",
-        end: "+=2000",
+        end: "+=2500",
         pin: true,
         pinSpacing: true,
         scrub: true,
-        markers: true
     }
     });
 
@@ -86,7 +87,7 @@
     listItems.forEach((item, i) => {
     const previousItem = listItems[i - 1];
     if (previousItem) {
-        tl.set(item, { color: "#0ae448" }, 0.5 * i)
+        tl.set(item, { color: "#D4DE95" }, 0.5 * i)
         .to(
             slides[i],
             {
@@ -95,7 +96,7 @@
             },
             "<"
         )
-        .set(previousItem, { color: "#fffce1" }, "<")
+        .set(previousItem, { color: "#D4DE95" }, "<")
         .to(
             slides[i - 1],
             {
@@ -105,7 +106,7 @@
             "<"
         );
     } else {
-        gsap.set(item, { color: "#0ae448" });
+        gsap.set(item, { color: "#D4DE95" });
         gsap.set(slides[i], { autoAlpha: 1 });
     }
     });

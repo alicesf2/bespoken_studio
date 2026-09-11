@@ -5,10 +5,12 @@ interface QaPair {
 }
 
 const { qaPairs } = Astro.props;
+
+console.log(qaPairs);
 ---
 
 <div id="accordion-collapse" data-accordion="collapse" class="
-  mb-12 overflow-hidden rounded-2xl bg-[#BAC095] outline-2
+  mb-12 overflow-hidden rounded-2xl border-[#BAC095] bg-[#BAC095]
 ">
   {qaPairs.map((pair: QaPair, i: number) => (
     <h2 id={`accordion-collapse-heading-${i}`}>
@@ -18,7 +20,7 @@ const { qaPairs } = Astro.props;
           hover:bg-neutral-secondary-medium hover:text-heading
           rtl:text-right
         " data-accordion-target={`#accordion-collapse-body-${i}`} aria-expanded="true" aria-controls="accordion-collapse-body-1">
-          <span>{pair.question}</span>
+          <span class="text-2xl font-semibold text-[#2C3015]">{pair.question}</span>
           <svg data-accordion-icon class="size-5 shrink-0 rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/></svg>
         </button>
       </h2>
@@ -27,7 +29,7 @@ const { qaPairs } = Astro.props;
         p-4
         md:p-5
       ">
-        <p class="mb-2 text-body">{pair.answer}</p>
+        <p class="mb-2 text-xl text-[#2C3015]">{pair.answer}</p>
       </div>
     </div>
   ))}

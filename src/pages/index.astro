@@ -9,45 +9,17 @@ import duckCookie from "../assets/duck-cookie.svg";
 import Accordion from "../components/Accordion.astro";
 import Projects from "../components/Projects.astro";
 import Services from "../components/Services.astro";
+import Faq from "../components/Faq.astro";
 
 // Load data from google doc
 const DOC_ID = "1at3hYMQABRJpuIawP0SN-N9_SJb4Nkqszz3UaEfhGv4";
 const url = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
 const text = await fetch(url).then((res) => res.text());
 const data = archieml.load(text);
-
-const projects = [
-	{
-		imgSrc: tag.src,
-		name: "Temperance Alley Garden",
-		description: `
-			A storybook-like walkthrough of Temperance Alley Garden, a community garden in Washington, D.C.
-			This website is meant to be a whimsical yet educational digital counterpart to the physical exploration of the garden.
-			People can learn more about the plants being grown, current and past projects, and the history of the garden. 
-			Built in collaboration with U Street Neighborhood Association, a nonprofit serving the community and businesses in U Street Corridor.
-			Illustrated by Amy Tian
-		`
-	}, 
-	{
-		imgSrc: tag.src,
-		name: "Treasure Tongue",
-		description: `
-			An interactive game meant to aid children participating in speech therapy in practicing their speech patterns.
-		`
-	}, 
-	{
-		imgSrc: tag.src,
-		name: "Blue Marble"
-	}, 
-	// {
-	// 	imgSrc: tag.src,
-	// 	name: "Pets of New York (PONY)"
-	// }
-]
 ---
 
 <Layout>
-	<div class="mt-24 flex flex-col gap-12">
+	<div class="mt-24 flex flex-col">
 		<h1 id="description" class="text-5xl/heading-none text-[#16180A]" data-text={data.newDescription}>{data.oldDescription}</h1>		
 		<div class="flex flex-row gap-12">
 			<img src={duckCookie.src} class="size-80"/>
@@ -56,15 +28,8 @@ const projects = [
 			</div>
 		</div>
 		<Services />
-		<section class="rounded-2xl bg-[#636B2F] p-6">
-			<h4 class="text-2xl font-bold text-[#D4DE95]">Current Projects</h4>
-			<Projects />
-		</section>
-		<section class="flex flex-col gap-4">
-			<h3 class="text-2xl font-bold">FAQ</h3>
-			<Accordion qaPairs={data.faq} />
-		</section>
-
+		<Projects projects={data.projects} />
+		<Faq qaPairs={data.faq} />
 	</div>
 </Layout>
 
