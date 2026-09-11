@@ -17,18 +17,21 @@ const bgColor = "#504831"
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 	</head>
-	<body class="max-w-400">
+	<body>
 		<Nav />
-		<slot />
+		<main>
+			<slot />
+		</main>
 		<script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
 	</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 24px auto;
+	html, body {
 		height: 100%;
 		background: #3D4127;
+	}
+	main {
+		margin: 150px 48px;
 	}
 </style>
