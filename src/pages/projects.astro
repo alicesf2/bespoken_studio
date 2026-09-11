@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css"
+
+const projects = [
+    {
+        slug: "multigen-magic",
+        name: "Multigenerational Magic",
+        date: "april 2025",
+        company: "The Atlantic",
+        url: "https://www.theatlantic.com/sponsored/destination-dc/multigenerational-magic/3997/",
+        thumb: "",
+        description: `
+            An interactive piece I worked on for The Atlantic in collaboration with the Washington DC tourism site.
+            This piece follows the Acors family as they explore D.C. for the weekend, structured like a family group chat. 
+        `
+    },
+    {
+        slug: "living-large",
+        name: "Living Large",
+        date: "march 2023",
+        company: "National Geographic",
+        url: "https://www.nationalgeographic.com/magazine/graphics/animal-aging-longevity",
+        thumb: "",
+        description: `
+            A fun, explorative piece that compares animal sizes to their longevity. As you scroll, a human woman follows your
+            cursor, allowing you to see how large the animal is relative to a human.
+        `
+    },
+    {
+        slug: "photographers-oty",
+        name: "Photographers of the Year",
+        date: "december 2022",
+        company: "National Geographic",
+        url: "https://www.nationalgeographic.com/magazine/graphics/photographers-of-the-year-2022-feature",
+        thumb: "",
+        description: `
+            The photographers' counterpart to Nat Geo's Pictures of the Year annual feature. This piece tells the stories
+            behind each highlighted photographer and includes voice recordings so you can hear them explain their photos
+            and inspirations themselves.
+        `
+    }
+]
+---
+
+
+<Layout>
+    <section>
+        {projects.map(project => (
+            <a class="flex flex-row gap-4 outline-2 rounded-2xl max-w-1/3" href={project.url}>
+                <div class="flex-1">
+                    <img class="rounded-l-2xl" src={project.thumb}/>
+                </div>
+                <div class="flex-1 p-4">
+                    <p class="text-xl font-bold">{project.name}</p>
+                    <p>{project.description}</p>
+                </div>
+            </a>
+        ))}
+    </section>
+</Layout>

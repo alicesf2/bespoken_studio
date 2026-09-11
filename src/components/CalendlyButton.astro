@@ -1,0 +1,29 @@
+---
+---
+
+<button id="consultation" class="
+  cursor-pointer rounded-xl bg-[#636B2F] px-3 py-2 font-bold text-white
+  outline-2
+  hover:bg-black/75
+">Book Consultation</button>
+
+<script is:inline>
+    const calendlyScript = document.createElement('script');
+
+	calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
+	calendlyScript.async = true;
+
+	calendlyScript.onload = () => {
+		if (window.Calendly) {
+            const consultationBtn = document.getElementById("consultation");
+            consultationBtn?.addEventListener("click", () => {
+                Calendly.initPopupWidget({
+                    url: 'https://calendly.com/alicesfang/bespoken-consultation'
+                });
+            })
+		}
+	};
+
+	document.head.appendChild(calendlyScript);
+	
+</script>

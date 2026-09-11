@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css"
+
+const pillars = [
+    {
+        name: "community",
+        description: "the chinese character 'tuan', which means group.",
+        character: "团",
+    }, {
+        name: "education",
+        description: "the chinese character 'xue', which means learn.",
+        character: "学",
+    }, {
+        name: "environment",
+        description: "there's no singular character equivalent, so i chose the chinese character 'sheng', which means birth or life. it's also a prefix for many environmental terms.",
+        character: "生",
+    }
+]
+---
+
+<Layout>
+    <section class="flex flex-col space-y-8">
+        <h4 class="text-xl text-center">bespoken's mission is to build tech that fosters community, encourages creativity, and spreads awareness of the good work people do every day.</h4>
+        <h4 class="text-xl text-center">our work upholds three pillars:</h4>
+
+        <div class="flex flex-row gap-20 justify-center">
+            {pillars.map(pillar => (
+                <div class="flex flex-col gap-4 w-45">
+                    <div class="h-60 border-8 flex justify-center items-center rounded-2xl">
+                        <p class="text-7xl text-red">{pillar.character}</p>
+                    </div>
+                    <p class="text-center font-semibold text-xl">{pillar.name}</p>
+                    <p>{pillar.description}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+</Layout>

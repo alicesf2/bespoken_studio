@@ -1,36 +1,103 @@
 ---
+import archieml from "archieml";
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import CalendlyButton from "../components/CalendlyButton.astro"
 import "../styles/global.css";
+import tag from "../assets/tag-thumbnail.png";
+import duckCookie from "../assets/duck-cookie.svg";
+import Accordion from "../components/Accordion.astro";
+import Projects from "../components/Projects.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-const projects = ["Temperance Alley Garden", "Speech Therapy Treasure Hunt", "Blue Marble Nursery", "Pets of New York (PONY)"];
+// Load data from google doc
+const DOC_ID = "1at3hYMQABRJpuIawP0SN-N9_SJb4Nkqszz3UaEfhGv4";
+const url = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
+const text = await fetch(url).then((res) => res.text());
+const data = archieml.load(text);
+
+const projects = [
+	{
+		imgSrc: tag.src,
+		name: "Temperance Alley Garden",
+		description: `
+			A storybook-like walkthrough of Temperance Alley Garden, a community garden in Washington, D.C.
+			This website is meant to be a whimsical yet educational digital counterpart to the physical exploration of the garden.
+			People can learn more about the plants being grown, current and past projects, and the history of the garden. 
+			Built in collaboration with U Street Neighborhood Association, a nonprofit serving the community and businesses in U Street Corridor.
+			Illustrated by Amy Tian
+		`
+	}, 
+	{
+		imgSrc: tag.src,
+		name: "Treasure Tongue",
+		description: `
+			An interactive game meant to aid children participating in speech therapy in practicing their speech patterns.
+		`
+	}, 
+	{
+		imgSrc: tag.src,
+		name: "Blue Marble"
+	}, 
+	// {
+	// 	imgSrc: tag.src,
+	// 	name: "Pets of New York (PONY)"
+	// }
+]
 ---
 
 <Layout>
-	<div class="flex flex-col gap-8">
-		<nav class="py-4 border-b-2">
-			<ol class="flex flex-row gap-8 items-center">
-				<li class="text-3xl">bespoken.studio</li>
-				<li>about</li>
-				<li>projects</li>
-				<li>
-					<button class="outline bg-black text-white font-bold rounded-2xl px-3 py-2 cursor-pointer hover:bg-black/75">book consultation</button>
-				</li>
-			</ol>
-		</nav>
-		<h3 class="text-2xl">say goodbye to boring, cookie-cutter landing pages. you deserve a website that tells your unique story.</h3>
-		<h4 class="text-xl">bespoken.studio is a digital agency focused on helping small businesses build their online brand. in an age where creativity and code are increasingly automated and standardized, we believe in upholding the artisinal aspect of building a website.</h4>
-
-		<h2>Current Projects</h2>
-		<section class="flex flex-row gap-4 w-full justify-between">
-			{projects.map(project => (
-				<div>
-					<div class="bg-gray-400 size-40">Thumbnail</div>
-					<p>{project}</p>
-				</div>
-			))}
+	<div class="mt-24 flex flex-col gap-12">
+		<h1 id="description" class="text-5xl text-[#16180A]" data-text={data.newDescription}>{data.oldDescription}</h1>		
+		<div class="flex flex-row gap-12">
+			<img src={duckCookie.src} class="size-80"/>
+			<div class="flex flex-col gap-12">
+				<h3 class="text-2xl text-[#D4DE95]">{data.secondaryDescription}</h3>
+				<section class="rounded-2xl bg-[#636B2F] p-6">
+					<h4 class="text-2xl font-bold text-[#D4DE95]">Current Projects</h4>
+						<!-- {projects.map(project => (
+							<a class="flex max-w-1/3 flex-col gap-4 rounded-2xl outline-2" href="https://sanctuary.ustreetcommunity.org/">
+								<div class="flex-1">
+									<img class="rounded-l-2xl" src={project.imgSrc}/>
+								</div>
+								<div class="flex-1 p-4">
+									<p class="text-xl font-bold">{project.name}</p>
+									<p>{project.description}</p>
+								</div>
+							</a>
+						))} -->
+					<Projects />
+				</section>
+			</div>
+		</div>
+		<section class="flex flex-col gap-4">
+			<h3 class="text-2xl font-bold">FAQ</h3>
+			<Accordion qaPairs={data.faq} />
 		</section>
+
 	</div>
 </Layout>
+
+<script>
+	import { gsap } from "gsap";
+	import { TextPlugin } from "gsap/TextPlugin";
+	
+	gsap.registerPlugin(TextPlugin);
+
+	const description = document.getElementById("description");
+
+	console.log(description)
+	const newDescriptionText = description?.dataset.text;
+
+	if (newDescriptionText) {
+		gsap.to(description, {
+			duration: 10,
+			text: {
+				value: newDescriptionText,
+				newClass: "text-[#D4DE95]",
+				padSpace: true,
+			},
+			ease: "none",
+			delay: 3,
+		})
+	}
+</script>

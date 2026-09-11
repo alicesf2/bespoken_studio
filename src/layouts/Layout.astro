@@ -1,3 +1,8 @@
+---
+import Nav from "../components/Nav.astro"
+const bgColor = "#504831"
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,18 +10,25 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
+		<link
+			href="https://assets.calendly.com/assets/external/widget.css"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 	</head>
-	<body>
+	<body class="max-w-400">
+		<Nav />
 		<slot />
+		<script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
 	</body>
 </html>
 
 <style>
 	html,
 	body {
-		margin: 24px;
+		margin: 24px auto;
 		height: 100%;
+		background: #3D4127;
 	}
 </style>

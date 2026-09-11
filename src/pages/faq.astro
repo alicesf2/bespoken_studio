@@ -1,0 +1,16 @@
+---
+import archieml from "archieml";
+import Layout from "../layouts/Layout.astro"
+import "../styles/global.css";
+import Accordion from "../components/Accordion.astro";
+
+// Load data from google doc
+const DOC_ID = "1at3hYMQABRJpuIawP0SN-N9_SJb4Nkqszz3UaEfhGv4";
+const url = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
+const text = await fetch(url).then((res) => res.text());
+const data = archieml.load(text);
+---
+
+<Layout>
+    <Accordion qaPairs={data.faq} />
+</Layout>
