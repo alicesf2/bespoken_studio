@@ -3,3 +3,7 @@
 
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+
+@theme inline {
+  --font-default: var(--font-playpen);
+}

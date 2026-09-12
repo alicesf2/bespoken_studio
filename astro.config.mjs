@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
@@ -7,7 +7,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: "https://sanctuary.ustreetcommunity.org",
+  site: "http://bespoken.studio",
   base: "/",
-  fonts: [],
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Playpen Sans",
+      cssVariable: "--font-playpen",
+    },
+  ],
 });
