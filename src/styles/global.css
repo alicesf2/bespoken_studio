@@ -2,8 +2,9 @@
 @import "flowbite/src/themes/default";
 
 @plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
+@source "../../node_modules/flowbite";
 
 @theme inline {
-  --font-default: var(--font-playpen);
+  --font-default: var(--font-bubbles);
+  --background-image-living-large: url('../assets/living-large.png');
 }

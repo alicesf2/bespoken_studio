@@ -4,7 +4,10 @@ import Accordion from "./Accordion.astro"
 const { qaPairs } = Astro.props;
 ---
 
-<section class="-ml-12 flex h-180 w-screen flex-col gap-8 p-12">
+<section class="
+  mx-auto flex h-[calc(100vh-80px)] w-screen max-w-300 flex-col gap-8 p-12
+  font-default
+">
     <h3 class="pt-4 text-3xl font-semibold text-[#D4DE95]">FAQ</h3>
     <Accordion qaPairs={qaPairs} />
 </section>

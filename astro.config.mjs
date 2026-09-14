@@ -12,8 +12,8 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: "Playpen Sans",
-      cssVariable: "--font-playpen",
+      name: "Fuzzy Bubbles",
+      cssVariable: "--font-bubbles",
     },
   ],
 });

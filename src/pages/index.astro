@@ -20,14 +20,17 @@ const data = archieml.load(text);
 
 <Layout>
 	<div class="mt-24 flex flex-col">
-		<h1 id="description" class="text-5xl/heading-none text-[#16180A]" data-text={data.newDescription}>{data.oldDescription}</h1>		
-		<div class="flex flex-row gap-12">
-			<img src={duckCookie.src} class="size-80"/>
-			<div class="flex flex-col gap-12">
-				<h3 class="text-3xl/11.25 text-[#D4DE95]">{data.secondaryDescription}</h3>
+		<section class="mx-auto h-[calc(100vh-80px)] max-w-300">
+			<h1 id="description" class="font-default text-5xl/20 text-[#16180A]" data-text={data.newDescription}>{data.oldDescription}</h1>		
+			<div class="flex flex-row gap-12">
+				<img src={duckCookie.src} class="size-80"/>
+				<div class="flex flex-col gap-12">
+					<h3 class="font-default text-3xl/11.25 text-[#D4DE95]">{data.secondaryDescription}</h3>
+				</div>
 			</div>
-		</div>
-		<Services />
+			<p>Scroll down</p>
+		</section>
+		<Services services={data.services} />
 		<Projects projects={data.projects} />
 		<Faq qaPairs={data.faq} />
 	</div>
@@ -40,8 +43,6 @@ const data = archieml.load(text);
 	gsap.registerPlugin(TextPlugin);
 
 	const description = document.getElementById("description");
-
-	console.log(description)
 	const newDescriptionText = description?.dataset.text;
 
 	if (newDescriptionText) {

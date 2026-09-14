@@ -1,23 +1,32 @@
 ---
 const { projects } = Astro.props;
+import livingLarge from "../assets/living-large.jpg";
 
 interface Project {
     name: string;
     description: string;
+    url: string;
 }
 ---
 
-<section class="-ml-12 flex h-180 w-screen flex-col gap-8 bg-[#636B2F] p-12">
-    <h3 class="pt-4 text-3xl font-bold text-[#D4DE95]">Projects</h3>
-
-    <div class="grid grid-cols-3 gap-4">
-        {projects.map((project: Project) => (
-            <div class="
-              flex h-35 flex-col items-center justify-center rounded-2xl
-              bg-[#3D4127]
-            ">
-                <h3 class="text-3xl text-[#D4DE95]">{project.name}</h3>
-            </div>
-        ))}
+<section class="
+  flex h-[calc(100vh-80px)] w-screen flex-col gap-8 bg-[#636B2F] p-12
+  font-default
+">
+    <div class="mx-auto max-w-300">
+        <h3 class="pt-4 text-3xl font-bold text-[#D4DE95]">Projects</h3>
+        <div class="grid grid-cols-3 gap-4">
+            {projects.map((project: Project) => (
+                <a href={project.url}>
+                    <div class="
+                      flex h-35 flex-col items-center justify-center rounded-2xl
+                      bg-[#3D4127] bg-living-large bg-cover opacity-50
+                    ">
+                    <h3 class="text-3xl font-bold text-black uppercase">{project.name}</h3>
+                </div>
+                </a>
+                
+            ))}
+        </div>
     </div>
 </section>
