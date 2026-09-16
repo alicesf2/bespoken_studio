@@ -12,6 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@sanity/astro": "^3.5.1",
+    "@sanity/client": "^8.6.2",
+    "@sanity/types": "^6.14.1",
     "@tailwindcss/vite": "^4.3.0",
     "archieml": "^0.5.0",
     "astro": "^6.3.2",
@@ -23,6 +26,11 @@
     "gsap": "^3.15.0",
     "html-entities": "^2.6.0",
     "htmlparser2": "^12.0.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-is": "^19.3.0",
+    "sanity": "^6.14.1",
+    "styled-components": "^6.5.3",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.0"
   },

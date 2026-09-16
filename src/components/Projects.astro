@@ -1,11 +1,15 @@
 ---
 const { projects } = Astro.props;
-import livingLarge from "../assets/living-large.jpg";
+import { Image } from "astro:assets";
 
 interface Project {
     name: string;
     description: string;
+    date: string;
+    collaborator: string;
     url: string;
+    image: any;
+    imageAlt: string;
 }
 ---
 
@@ -20,7 +24,7 @@ interface Project {
                 <a href={project.url}>
                     <div class="
                       flex h-35 flex-col items-center justify-center rounded-2xl
-                      bg-[#3D4127] bg-living-large bg-cover opacity-50
+                      bg-[#3D4127] bg-cover opacity-50
                     ">
                     <h3 class="text-3xl font-bold text-black uppercase">{project.name}</h3>
                 </div>

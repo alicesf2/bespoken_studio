@@ -1,12 +1,10 @@
 ---
 import archieml from "archieml";
-import Welcome from '../components/Welcome.astro';
+import type { SanityDocument } from "@sanity/client";
+import { sanityClient } from "sanity:client";
 import Layout from '../layouts/Layout.astro';
-import CalendlyButton from "../components/CalendlyButton.astro"
 import "../styles/global.css";
-import tag from "../assets/tag-thumbnail.png";
 import duckCookie from "../assets/duck-cookie.svg";
-import Accordion from "../components/Accordion.astro";
 import Projects from "../components/Projects.astro";
 import Services from "../components/Services.astro";
 import Faq from "../components/Faq.astro";
@@ -16,6 +14,13 @@ const DOC_ID = "1at3hYMQABRJpuIawP0SN-N9_SJb4Nkqszz3UaEfhGv4";
 const url = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
 const text = await fetch(url).then((res) => res.text());
 const data = archieml.load(text);
+
+// Query objects from Sanity CMS
+const PROJECTS_QUERY = `*[
+  _type == "project"
+]|order(date desc)`;
+
+const projects = await sanityClient.fetch<SanityDocument[]>(PROJECTS_QUERY)
 ---
 
 <Layout>
@@ -31,7 +36,7 @@ const data = archieml.load(text);
 			<p>Scroll down</p>
 		</section>
 		<Services services={data.services} />
-		<Projects projects={data.projects} />
+		<Projects projects={projects} />
 		<Faq qaPairs={data.faq} />
 	</div>
 </Layout>
