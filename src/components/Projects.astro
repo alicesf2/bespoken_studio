@@ -19,20 +19,18 @@ const PROJECTS_QUERY = `*[
 ]|order(date desc){collaborator, dark, date, description, image, imageAlt, name, url}`;
 
 const projects = await sanityClient.fetch<Project[]>(PROJECTS_QUERY);
-
-console.log(projects);
 ---
 
 <section class="h-[calc(100vh-80px)] w-screen bg-[#636B2F] p-12 font-default">
     <div class="mx-auto flex max-w-300 flex-col gap-8">
-        <h3 class="pt-4 text-3xl font-bold text-[#D4DE95]">Projects</h3>
+        <h3 class="text-3xl font-bold text-[#D4DE95]">Projects</h3>
         <div class="grid grid-cols-3 gap-4">
             {projects.map((project: Project) => (
                 <a href={project.url} class="flex flex-col gap-2">
                     <SanityImage image={project.image} alt={project.imageAlt} class="
-                      aspect-901/319 rounded-2xl
+                      aspect-2804/1536 rounded-2xl border border-[#16180A]
                     "/>
-                    <p class="text-center text-xl">{project.name}</p>
+                    <p class="text-center text-xl text-[#D4DE95]">{project.name}</p>
                 </a>
             ))}
         </div>
