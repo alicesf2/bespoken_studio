@@ -1,43 +1,34 @@
 ---
-import archieml from "archieml";
-import type { SanityDocument } from "@sanity/client";
-import { sanityClient } from "sanity:client";
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 import duckCookie from "../assets/duck-cookie.svg";
 import Projects from "../components/Projects.astro";
 import Services from "../components/Services.astro";
 import Faq from "../components/Faq.astro";
+import { headings, secondaryDescription } from "../data/copy.ts";
 
-// Load data from google doc
-const DOC_ID = "1at3hYMQABRJpuIawP0SN-N9_SJb4Nkqszz3UaEfhGv4";
-const url = `https://docs.google.com/document/d/${DOC_ID}/export?format=txt`;
-const text = await fetch(url).then((res) => res.text());
-const data = archieml.load(text);
-
-// Query objects from Sanity CMS
-const PROJECTS_QUERY = `*[
-  _type == "project"
-]|order(date desc)`;
-
-const projects = await sanityClient.fetch<SanityDocument[]>(PROJECTS_QUERY)
+const randomIndex = Math.floor(Math.random() * 3);
+const oldDescription = headings[randomIndex].oldDescription;
+const newDescription = headings[randomIndex].newDescription;
 ---
 
 <Layout>
 	<div class="mt-24 flex flex-col">
-		<section class="mx-auto h-[calc(100vh-80px)] max-w-300">
-			<h1 id="description" class="font-default text-5xl/20 text-[#16180A]" data-text={data.newDescription}>{data.oldDescription}</h1>		
+		<section class="mx-auto flex h-[calc(100vh-80px)] max-w-300 flex-col gap-12">
+			<h1 id="description" class="
+     font-default text-4xl/heading-none text-[#16180A]
+   " data-text={newDescription}>{oldDescription}</h1>		
 			<div class="flex flex-row gap-12">
 				<img src={duckCookie.src} class="size-80"/>
 				<div class="flex flex-col gap-12">
-					<h3 class="font-default text-3xl/11.25 text-[#D4DE95]">{data.secondaryDescription}</h3>
+					<h3 class="font-default text-2xl/10 text-[#D4DE95]">{secondaryDescription}</h3>
 				</div>
 			</div>
 			<p>Scroll down</p>
 		</section>
-		<Services services={data.services} />
-		<Projects projects={projects} />
-		<Faq qaPairs={data.faq} />
+		<Services />
+		<Projects />
+		<Faq />
 	</div>
 </Layout>
 
@@ -60,6 +51,7 @@ const projects = await sanityClient.fetch<SanityDocument[]>(PROJECTS_QUERY)
 			},
 			ease: "none",
 			delay: 3,
+			speed: 20,
 		})
 	}
 </script>

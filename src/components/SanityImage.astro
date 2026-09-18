@@ -1,0 +1,16 @@
+---
+import { urlFor } from '../lib/image'
+
+interface Props {
+  image: any
+  alt: string
+  width?: number
+  class?: string
+  
+}
+
+const { image, alt, width = 800, class: className } = Astro.props
+const url = urlFor(image).width(width).auto('format').url()
+---
+
+<img src={url} alt={alt} width={width} loading="lazy" class={className} />

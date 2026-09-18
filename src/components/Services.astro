@@ -1,10 +1,21 @@
 ---
-const { design, development, analytics, storytelling } = Astro.props.services;
+import { sanityClient } from "sanity:client";
+
+interface Service {
+    name: string;
+    description: string;
+    image: any;
+    imageAlt: string;
+}
+
+// Query services from Sanity CMS
+const SERVICES_QUERY = `*[
+  _type == "service"
+]{name, description, image, imageAlt}`;
+
+const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
 ---
 
-<!-- <section class="section flex h-[300px] w-full items-center justify-center">
-  <h3>scroll down</h3>
-</section> -->
 <section class="
   section pin-section h-[calc(100vh-80px)] w-screen bg-[#2C3015] p-12
   font-default text-[#D4DE95]
@@ -17,44 +28,36 @@ const { design, development, analytics, storytelling } = Astro.props.services;
                   list m-0 grow-0 list-none p-0 pr-2.5 font-default text-[30px]
                   text-(--color-surface-white)
                 ">
-                    <li>Design</li>
-                    <li>Website Development</li>
-                    <li>SEO & Analytics</li>
-                    <li>Interactive Storytelling</li>
+                    {
+                        services.map((service: Service) => (
+                            <li>{service.name}</li>
+                        ))
+                    }
                 </ul>
                 <div class="
                   fill absolute top-0 left-0 h-full w-0.5 bg-[#D4DE95]
                 "></div>
                 <div class="right relative grow">
-                    <div class="
-                      slide center invisible absolute top-1/2 right-4 flex
-                      -translate-y-1/2 flex-col items-center justify-center
-                      gap-4 rounded-[10px] opacity-0
-                    ">
-                        <img class="w-full max-w-30" src="https://assets.codepen.io/16327/portrait-number-01.png" alt="" />
-                        <p class="max-w-150 text-xl">{design}</p>
-                    </div>
-                    <div class="
-                      slide center invisible absolute top-1/2 right-4 w-1/2
-                      -translate-y-1/2 rounded-[10px] opacity-0
-                    ">
-                        <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-02.png" alt="" />
-                        <p>{development}</p>
-                    </div>
-                    <div class="
-                      slide center invisible absolute top-1/2 right-4 w-1/2
-                      -translate-y-1/2 rounded-[10px] opacity-0
-                    ">
-                        <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-03.png" alt="" />
-                        <p>{analytics}</p>
-                    </div>
-                    <div class="
-                      slide center invisible absolute top-1/2 right-4 w-1/2
-                      -translate-y-1/2 rounded-[10px] opacity-0
-                    ">
-                        <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-04.png" alt="" />
-                        <p>{storytelling}</p>
-                    </div>
+                    {services.map((service: Service, i: number) => (
+                        i === 0 ? (
+                            <div class="
+                              slide center invisible absolute top-1/2 right-4
+                              flex -translate-y-1/2 flex-col items-center
+                              justify-center gap-4 rounded-[10px] opacity-0
+                            ">
+                                <img class="w-full max-w-30" src="https://assets.codepen.io/16327/portrait-number-01.png" alt="" />
+                                <p class="max-w-150 text-xl">{service.description}</p>
+                            </div>
+                        ) : (
+                            <div class="
+                              slide center invisible absolute top-1/2 right-4
+                              w-1/2 -translate-y-1/2 rounded-[10px] opacity-0
+                            ">
+                                <img class="w-full max-w-75" src="https://assets.codepen.io/16327/portrait-number-02.png" alt="" />
+                                <p>{service.description}</p>
+                            </div>
+                        )
+                    ))}
                 </div>
             </div>
         </div>
@@ -131,4 +134,5 @@ const { design, development, analytics, storytelling } = Astro.props.services;
     },
     0
     ).to({}, {}); // add a small pause at the end of the timeline before it un-pins
+    
 </script>

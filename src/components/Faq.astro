@@ -1,7 +1,18 @@
 ---
+import { sanityClient } from "sanity:client";
 import Accordion from "./Accordion.astro"
 
-const { qaPairs } = Astro.props;
+export interface FAQ {
+    question: string;
+    answer: string;
+}
+
+// Query FAQ from Sanity CMS
+const FAQ_QUERY = `*[
+  _type == "faq"
+]{question, answer}`;
+
+const faqs = await sanityClient.fetch<FAQ[]>(FAQ_QUERY);
 ---
 
 <section class="
@@ -9,5 +20,5 @@ const { qaPairs } = Astro.props;
   font-default
 ">
     <h3 class="pt-4 text-3xl font-semibold text-[#D4DE95]">FAQ</h3>
-    <Accordion qaPairs={qaPairs} />
+    <Accordion faqs={faqs} />
 </section>

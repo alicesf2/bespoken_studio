@@ -1,34 +1,37 @@
 ---
-interface QaPair {
-  question: string;
-  answer: string;
-}
+import type { FAQ } from "./Faq.astro";
 
-const { qaPairs } = Astro.props;
+const { faqs } = Astro.props;
 ---
 
+
 <div id="accordion-collapse" data-accordion="collapse" class="
-  mb-12 overflow-hidden rounded-2xl border-[#BAC095] bg-[#BAC095]
+  overflow-hidden rounded-base border shadow-xs
 ">
-  {qaPairs.map((pair: QaPair, i: number) => (
+  {faqs.map((faq: FAQ, i: number) => (
     <h2 id={`accordion-collapse-heading-${i}`}>
-        <button type="button" class="
-          flex w-full items-center justify-between gap-3 rounded-t-base border
-          border-x-0 border-t-0 border-b-2 p-5 font-bold text-body
-          hover:bg-[#D4DE95] hover:text-heading
-          rtl:text-right
-        " data-accordion-target={`#accordion-collapse-body-${i}`} aria-expanded="true" aria-controls="accordion-collapse-body-1">
-          <span class="text-2xl font-semibold text-[#2C3015]">{pair.question}</span>
-          <svg data-accordion-icon class="size-5 shrink-0 rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/></svg>
-        </button>
-      </h2>
-    <div id={`accordion-collapse-body-${i}`} class="hidden border-b-2" aria-labelledby={`#accordion-collapse-heading-${i}`}>
+      <button type="button" class="
+        flex w-full items-center justify-between gap-3 border border-x-0
+        border-t-0 border-b-[#16180A] bg-[#BAC095]! p-5 text-xl font-medium
+        text-[#16180A]!
+        hover:bg-[#959867]!
+        rtl:text-right
+      " data-accordion-target={`#accordion-collapse-body-${i}`} aria-expanded="false" aria-controls={`accordion-collapse-body-${i}`}>
+        <span>{faq.question}</span>
+        <svg data-accordion-icon class="size-5 shrink-0 rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/></svg>
+      </button>
+    </h2>
+    <div id={`accordion-collapse-body-${i}`} class="
+      hidden border border-s-0 border-e-0 border-t-0 border-b-[#16180A]
+      bg-[#BAC095]
+    " aria-labelledby={`accordion-collapse-heading-${i}`}>
       <div class="
         p-4
         md:p-5
       ">
-        <p class="mb-2 text-xl text-[#2C3015]">{pair.answer}</p>
+        <p class="mb-2">{faq.answer}</p>
       </div>
     </div>
   ))}
 </div>
+
