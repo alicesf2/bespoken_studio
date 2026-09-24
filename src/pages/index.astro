@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
-import duckCookie from "../assets/duck-cookie.svg";
 import downArrow from "../assets/down-arrow.svg";
 import Projects from "../components/Projects.astro";
 import Services from "../components/Services.astro";
 import Faq from "../components/Faq.astro";
 import { description, secondaryDescription } from "../data/copy.ts";
 import CalendlyButton from '../components/CalendlyButton.astro';
+import ButtonWrapper from '../components/ButtonWrapper.astro';
 ---
 
 <Layout>
@@ -19,20 +19,23 @@ import CalendlyButton from '../components/CalendlyButton.astro';
     mx-auto flex h-screen w-screen flex-col gap-80 p-18 font-default
   ">
 			<div class="relative">
-				<div class="absolute max-w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6 outline-2">
-					<h1 id="description" class="font-default text-5xl/heading-none">{description}</h1>
+				<div class="
+      absolute h-60 w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6 outline-2
+    ">
+					<h1 class="font-default text-5xl/heading-none">{description}</h1>
 				</div>
 				<div class="
-      absolute top-5 left-5 max-w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6
+      absolute top-5 left-5 h-60 w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6
       outline-2
     ">
-					<h1 id="description" class="font-default text-5xl/heading-none">{description}</h1>
+					<h1 class="font-default text-5xl/heading-none">{description}</h1>
 				</div>
-				<div class="
-      absolute top-10 left-10 max-w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6
+				<div id="description-wrapper" class="
+      absolute top-10 left-10 flex h-60 w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6
       outline-2
     ">
-					<h1 id="description" class="font-default text-5xl/heading-none">{description}</h1>
+					<span id="description" class="font-default text-5xl/heading-none"></span>
+					<span id="cursor" class="m-0 inline-block text-black">|</span>
 				</div>
 			</div>
 			<div class="relative">
@@ -41,13 +44,15 @@ import CalendlyButton from '../components/CalendlyButton.astro';
       outline-2
     ">
 					<h3 class="font-default text-2xl/10">{secondaryDescription}</h3>
-					<CalendlyButton text="Book a free consultation" />
+					<div class="flex flex-row gap-4">
+						<ButtonWrapper text="Learn more" class="
+        flex flex-row items-center justify-center gap-2
+      ">
+							<img src={downArrow.src} class="size-4"/>
+						</ButtonWrapper>
+						<CalendlyButton text="Book a free consultation"/>
+					</div>
 				</div>
-			</div>
-			
-			<div class="flex flex-row items-center justify-center gap-2">
-				<img src={downArrow.src} class="size-8"/>
-				<p>Scroll down</p>
 			</div>
 		</section>
 		<Services />
@@ -59,23 +64,24 @@ import CalendlyButton from '../components/CalendlyButton.astro';
 <script>
 	import { gsap } from "gsap";
 	import { TextPlugin } from "gsap/TextPlugin";
-	
+	import { description } from "../data/copy.ts";
+
 	gsap.registerPlugin(TextPlugin);
 
-	const description = document.getElementById("description");
-	const newDescriptionText = description?.dataset.text;
+	console.log(description)
 
-	if (newDescriptionText) {
-		gsap.to(description, {
-			duration: 10,
-			text: {
-				value: newDescriptionText,
-				newClass: "text-[#D4DE95]",
-				padSpace: true,
-			},
-			ease: "none",
-			delay: 3,
-			speed: 20,
-		})
-	}
+	let cursor = document.querySelector("#cursor");
+	let descriptionEl = document.querySelector("#description");
+
+	gsap.fromTo(cursor, {autoAlpha: 0, x: 2}, {autoAlpha: 1, duration: 0.5, repeat: -1, ease: "steps(1)"});
+
+	gsap.to("#description", {
+		text: {
+			value: description
+		}, 
+		duration: 5,
+		delay: 1, 
+		ease: "none",
+		onUpdate: () => descriptionEl?.appendChild(cursor)
+	})
 </script>

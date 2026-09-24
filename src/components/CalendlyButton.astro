@@ -1,12 +1,10 @@
 ---
-const { text } = Astro.props;
+import ButtonWrapper from "./ButtonWrapper.astro";
+
+const { text = "Book consultation" } = Astro.props;
 ---
 
-<button id="consultation" class="
-  w-fit cursor-pointer self-center rounded-4xl bg-[#4c6745] px-3 py-2
-  font-default font-semibold text-white
-  hover:bg-[#4c6745]/75
-">{text}</button>
+<ButtonWrapper id="consultation">{text}</ButtonWrapper>
 
 <script is:inline>
     const calendlyScript = document.createElement('script');

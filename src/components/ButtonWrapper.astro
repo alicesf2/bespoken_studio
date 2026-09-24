@@ -1,0 +1,12 @@
+---
+import { cx } from "../lib/utils";
+const { id, class: className, text } = Astro.props;
+---
+
+<button id={id} class={cx(
+  `
+    w-fit cursor-pointer self-center rounded-4xl bg-[#698c60] px-3 py-2
+    font-default font-semibold text-white
+    hover:bg-[#4c6745]
+  `, className)}
+><slot />{text}</button>
