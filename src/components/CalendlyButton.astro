@@ -1,11 +1,12 @@
 ---
+const { text } = Astro.props;
 ---
 
 <button id="consultation" class="
-  cursor-pointer rounded-xl bg-[#636B2F] px-3 py-2 font-default font-bold
-  text-white outline
-  hover:bg-black/75
-">Book Consultation</button>
+  w-fit cursor-pointer self-center rounded-4xl bg-[#4c6745] px-3 py-2
+  font-default font-semibold text-white
+  hover:bg-[#4c6745]/75
+">{text}</button>
 
 <script is:inline>
     const calendlyScript = document.createElement('script');

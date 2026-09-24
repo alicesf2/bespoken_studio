@@ -2,29 +2,53 @@
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 import duckCookie from "../assets/duck-cookie.svg";
+import downArrow from "../assets/down-arrow.svg";
 import Projects from "../components/Projects.astro";
 import Services from "../components/Services.astro";
 import Faq from "../components/Faq.astro";
-import { headings, secondaryDescription } from "../data/copy.ts";
-
-const randomIndex = Math.floor(Math.random() * 3);
-const oldDescription = headings[randomIndex].oldDescription;
-const newDescription = headings[randomIndex].newDescription;
+import { description, secondaryDescription } from "../data/copy.ts";
+import CalendlyButton from '../components/CalendlyButton.astro';
 ---
 
 <Layout>
-	<div class="mt-24 flex flex-col">
-		<section class="mx-auto flex h-[calc(100vh-80px)] max-w-300 flex-col gap-12">
-			<h1 id="description" class="
-     font-default text-4xl/heading-none text-[#16180A]
-   " data-text={newDescription}>{oldDescription}</h1>		
-			<div class="flex flex-row gap-12">
-				<img src={duckCookie.src} class="size-80"/>
-				<div class="flex flex-col gap-12">
-					<h3 class="font-default text-2xl/10 text-[#D4DE95]">{secondaryDescription}</h3>
+	<div class="
+   flex flex-col bg-[url('../assets/background.png')] bg-cover bg-center
+   bg-repeat
+ ">
+		<section class="
+    mx-auto flex h-screen w-screen flex-col gap-80 p-18 font-default
+  ">
+			<div class="relative">
+				<div class="absolute max-w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6 outline-2">
+					<h1 id="description" class="font-default text-5xl/heading-none">{description}</h1>
+				</div>
+				<div class="
+      absolute top-5 left-5 max-w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6
+      outline-2
+    ">
+					<h1 id="description" class="font-default text-5xl/heading-none">{description}</h1>
+				</div>
+				<div class="
+      absolute top-10 left-10 max-w-250 rounded-2xl bg-[#b7e3ac] px-8 py-6
+      outline-2
+    ">
+					<h1 id="description" class="font-default text-5xl/heading-none">{description}</h1>
 				</div>
 			</div>
-			<p>Scroll down</p>
+			<div class="relative">
+				<div class="
+      absolute -right-10 flex max-w-250 flex-col gap-4 rounded-2xl px-8 py-6
+      outline-2
+    ">
+					<h3 class="font-default text-2xl/10">{secondaryDescription}</h3>
+					<CalendlyButton text="Book a free consultation" />
+				</div>
+			</div>
+			
+			<div class="flex flex-row items-center justify-center gap-2">
+				<img src={downArrow.src} class="size-8"/>
+				<p>Scroll down</p>
+			</div>
 		</section>
 		<Services />
 		<Projects />

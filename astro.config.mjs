@@ -16,8 +16,8 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: "Fuzzy Bubbles",
-      cssVariable: "--font-bubbles",
+      name: "Poppins",
+      cssVariable: "--font-poppins",
     },
   ],
 
