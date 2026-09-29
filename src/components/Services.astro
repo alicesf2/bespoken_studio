@@ -17,7 +17,9 @@ const SERVICES_QUERY = `*[
 const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
 ---
 
-<section class="section pin-section h-screen w-screen p-12 font-default">
+<section id="services" class="
+  section pin-section h-screen w-screen p-12 font-default
+">
     <h3 class="w-fit rounded-2xl bg-[#b7e3ac] px-8 py-6 text-3xl outline-2">What services do we provide?</h3>
     
     <div class="
@@ -44,7 +46,7 @@ const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
                           gap-4 rounded-[10px] opacity-0
                         ">
                             <SanityImage image={service.image} alt={service.imageAlt} class="
-                              max-w-60
+                              max-w-80
                             " />
                             <p class="max-w-150 text-lg">{service.description}</p>
                         </div>

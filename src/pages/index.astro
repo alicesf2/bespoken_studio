@@ -45,7 +45,7 @@ import ButtonWrapper from '../components/ButtonWrapper.astro';
     ">
 					<h3 class="font-default text-2xl/10">{secondaryDescription}</h3>
 					<div class="flex flex-row gap-4">
-						<ButtonWrapper text="Learn more" class="
+						<ButtonWrapper id="learn-more" text="Learn more" class="
         flex flex-row items-center justify-center gap-2
       ">
 							<img src={downArrow.src} class="size-4"/>
@@ -64,12 +64,13 @@ import ButtonWrapper from '../components/ButtonWrapper.astro';
 <script>
 	import { gsap } from "gsap";
 	import { TextPlugin } from "gsap/TextPlugin";
+	import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 	import { description } from "../data/copy.ts";
 
 	gsap.registerPlugin(TextPlugin);
+	gsap.registerPlugin(ScrollToPlugin);
 
-	console.log(description)
-
+	// Blinking cursor animation
 	let cursor = document.querySelector("#cursor");
 	let descriptionEl = document.querySelector("#description");
 
@@ -84,4 +85,29 @@ import ButtonWrapper from '../components/ButtonWrapper.astro';
 		ease: "none",
 		onUpdate: () => descriptionEl?.appendChild(cursor)
 	})
+
+	// Learn more scroll animation
+	const learnMoreBtn = document.getElementById("learn-more");
+
+	learnMoreBtn?.addEventListener("click", () => {
+		gsap.to(window, {
+			duration: 1,
+			scrollTo: "#services",
+			onComplete: () => {
+				gsap.set("#navbar", {
+					display: "block",
+					position: "fixed",
+					top: 0,
+					opacity: 0,
+				});
+
+				gsap.to("#navbar", {
+					opacity: 1,
+					duration: 0.5,
+					ease: "power2.out",
+				});
+			},
+		});
+	})
+	
 </script>
