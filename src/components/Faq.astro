@@ -16,9 +16,10 @@ const faqs = await sanityClient.fetch<FAQ[]>(FAQ_QUERY);
 ---
 
 <section class="
-  mx-auto flex h-[calc(100vh-80px)] w-screen max-w-300 flex-col gap-8 p-12
+  mx-auto flex h-[calc(100vh-80px)] w-screen max-w-300 flex-col gap-8
   font-default
+  xl:max-w-400
 ">
-    <h3 class="pt-4 text-3xl font-semibold text-[#D4DE95]">FAQ</h3>
+    <h3 class="w-fit rounded-2xl px-8 py-6 text-3xl outline-2">FAQ</h3>
     <Accordion faqs={faqs} />
 </section>

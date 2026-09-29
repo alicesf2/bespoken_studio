@@ -6,5 +6,10 @@
 
 @theme inline {
   --font-default: var(--font-poppins);
+  --color-light-green: #e0f7d3;
+  --color-green: #b7e3ac;
+  --color-mid-green: #698c60;
+  --color-dark-green: #4c6745;
+  --color-btn-green: #88b473;
   --background-image-living-large: url('../assets/living-large.png');
 }

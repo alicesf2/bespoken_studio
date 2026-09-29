@@ -22,15 +22,18 @@ const projects = await sanityClient.fetch<Project[]>(PROJECTS_QUERY);
 ---
 
 <section class="w-screen p-12 font-default">
-    <div class="mx-auto flex max-w-300 flex-col gap-8">
-        <h3 class="text-3xl font-bold text-[#D4DE95]">Projects</h3>
+    <div class="
+      mx-auto flex max-w-300 flex-col gap-8
+      xl:max-w-400
+    ">
+        <h3 class="w-fit rounded-2xl px-8 py-6 text-3xl outline-2">Past Projects</h3>
         <div class="grid grid-cols-3 gap-4">
             {projects.map((project: Project) => (
                 <a href={project.url} class="flex flex-col gap-2">
                     <SanityImage image={project.image} alt={project.imageAlt} class="
                       aspect-2804/1536 rounded-2xl border border-[#16180A]
                     "/>
-                    <p class="text-center text-xl text-[#D4DE95]">{project.name}</p>
+                    <p class="text-center text-xl">{project.name}</p>
                 </a>
             ))}
         </div>

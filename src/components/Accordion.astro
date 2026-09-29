@@ -12,9 +12,9 @@ const { faqs } = Astro.props;
     <h2 id={`accordion-collapse-heading-${i}`}>
       <button type="button" class="
         flex w-full items-center justify-between gap-3 border border-x-0
-        border-t-0 border-b-[#16180A] bg-[#BAC095]! p-5 text-xl font-medium
-        text-[#16180A]!
-        hover:bg-[#959867]!
+        border-t-0 border-b-[#16180A] bg-dark-green! p-5 text-xl font-medium
+        text-white!
+        hover:bg-mid-green!
         rtl:text-right
       " data-accordion-target={`#accordion-collapse-body-${i}`} aria-expanded="false" aria-controls={`accordion-collapse-body-${i}`}>
         <span>{faq.question}</span>
@@ -23,7 +23,7 @@ const { faqs } = Astro.props;
     </h2>
     <div id={`accordion-collapse-body-${i}`} class="
       hidden border border-s-0 border-e-0 border-t-0 border-b-[#16180A]
-      bg-[#BAC095]
+      bg-dark-green
     " aria-labelledby={`accordion-collapse-heading-${i}`}>
       <div class="
         p-4

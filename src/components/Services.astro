@@ -18,9 +18,10 @@ const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
 ---
 
 <section id="services" class="
-  section pin-section h-screen w-screen p-12 font-default
+  section pin-section mx-auto max-w-400 px-12 pt-26 font-default
+  xl:w-400
 ">
-    <h3 class="w-fit rounded-2xl bg-[#b7e3ac] px-8 py-6 text-3xl outline-2">What services do we provide?</h3>
+    <h3 class="w-fit rounded-2xl px-8 py-6 text-3xl outline-2">What services do we provide?</h3>
     
     <div class="
       mx-auto flex h-150 items-center justify-center
