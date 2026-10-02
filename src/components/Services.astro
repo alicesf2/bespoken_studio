@@ -18,115 +18,19 @@ const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
 ---
 
 <section id="services" class="
-  section pin-section mx-auto max-w-400 px-12 pt-26 font-default
-  xl:w-400
+  mx-auto mb-30 flex h-[calc(100vh-80px)] max-w-300 flex-col gap-12 font-default
 ">
-    <h3 class="w-fit rounded-2xl px-8 py-6 text-3xl outline-2">What services do we provide?</h3>
-    
-    <div class="
-      mx-auto flex h-150 items-center justify-center
-      xl:max-w-400
-    ">
-        <div class="content relative mx-auto flex w-full px-2.5">
-            <ul class="
-              list m-0 grow-0 list-none p-0 pr-2.5 font-default text-[30px]
-              text-(--color-surface-white)
-            ">
-                {
-                    services.map((service: Service) => (
-                        <li>{service.name}</li>
-                    ))
-                }
-            </ul>
-            <div class="fill absolute top-0 left-0 h-full w-0.5 bg-[#304c23]"></div>
-            <div class="right relative grow">
-                {services.map((service: Service, i: number) => (
-                        <div class="
-                          slide center invisible absolute top-1/2 right-4 flex
-                          -translate-y-1/2 flex-col items-center justify-center
-                          gap-4 rounded-[10px] opacity-0
-                        ">
-                            <SanityImage image={service.image} alt={service.imageAlt} class="
-                              max-w-80
-                            " />
-                            <p class="max-w-150 text-lg">{service.description}</p>
-                        </div>
-                    )
-                )}
+    <h3 class="mt-30 w-fit rounded-2xl px-8 py-6 text-3xl outline-2">Our Services</h3>
+    <div class="flex flex-row gap-4">
+        {services.map(service => (
+            <div class="text-center">
+                <SanityImage image={service.image} alt={service.imageAlt} />
+                <p class="text-lg">{service.name}</p>
             </div>
-        </div>
+        ))}
     </div>
 </section>
-<section class="section"></section>
 
 <script>
     import { gsap } from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    console.clear();
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    const list = document.querySelector(".list");
-    const fill = document.querySelector(".fill");
-    const listItems = gsap.utils.toArray("li", list);
-    const slides = gsap.utils.toArray(".slide");
-
-    const pinSections = gsap.utils.toArray(".pin-section");
-    const lists = gsap.utils.toArray(".list");
-    const tl = gsap.timeline({
-    scrollTrigger: {
-        trigger: ".pin-section",
-        start: "top top",
-        end: "+=2500",
-        pin: true,
-        pinSpacing: true,
-        scrub: true,
-    }
-    });
-
-    // First element visible, set the marker
-    fill &&
-    gsap.set(fill, {
-        scaleY: 1 / listItems.length,
-        transformOrigin: "top left"
-    });
-
-    listItems.forEach((item, i) => {
-    const previousItem = listItems[i - 1];
-    if (previousItem) {
-        tl.set(item, { color: "#304c23" }, 0.5 * i)
-        .to(
-            slides[i],
-            {
-                autoAlpha: 1,
-                duration: 0.2
-            },
-            "<"
-        )
-        .set(previousItem, { color: "#304c23" }, "<")
-        .to(
-            slides[i - 1],
-            {
-                autoAlpha: 0,
-                duration: 0.2
-            },
-            "<"
-        );
-    } else {
-        gsap.set(item, { color: "#304c23" });
-        gsap.set(slides[i], { autoAlpha: 1 });
-    }
-    });
-    tl.to(
-    fill,
-    {
-        scaleY: 1,
-        transformOrigin: "top left",
-        ease: "none",
-        duration: tl.duration()
-    },
-    0
-    ).to({}, {}); // add a small pause at the end of the timeline before it un-pins
-    
 </script>

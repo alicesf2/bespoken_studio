@@ -21,7 +21,10 @@ const PROJECTS_QUERY = `*[
 const projects = await sanityClient.fetch<Project[]>(PROJECTS_QUERY);
 ---
 
-<section class="w-screen p-12 font-default">
+<section class="
+  mx-auto h-[calc(100vh-80px)] max-w-300 font-default
+  2xl:max-w-400
+">
     <div class="
       mx-auto flex max-w-300 flex-col gap-8
       xl:max-w-400

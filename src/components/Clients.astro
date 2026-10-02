@@ -1,0 +1,25 @@
+---
+import { sanityClient } from "sanity:client";
+import SanityImage from "../components/SanityImage.astro";
+
+interface Client {
+    name: string;
+    image: any;
+    imageAlt: string;
+}
+
+// Query services from Sanity CMS
+const CLIENTS_QUERY = `*[
+  _type == "client"
+]|order(orderRank){name, image, imageAlt}`;
+
+const clients = await sanityClient.fetch<Client[]>(CLIENTS_QUERY);
+---
+
+<section id="clients">
+    <div class="flex flex-row gap-4">
+        {clients.map(client => (
+            <SanityImage image={client.image} alt={client.imageAlt} />
+        ))}
+    </div>
+</section>
