@@ -14,6 +14,7 @@ export default [
 
     rules: {
       ...eslintPluginBetterTailwindcss.configs.recommended.rules,
+      "better-tailwindcss/line-max-classes": "off",
     },
 
     settings: {

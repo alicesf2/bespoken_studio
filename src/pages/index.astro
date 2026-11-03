@@ -10,7 +10,9 @@ import { description, secondaryDescription } from "../data/copy.ts";
 import CalendlyButton from "../components/CalendlyButton.astro";
 import ButtonWrapper from "../components/ButtonWrapper.astro";
 import lilypadLeft from "../assets/lilypad-left.svg";
-import lilypadRight from "../assets/lilypad-right.svg";
+import cloud from "../assets/cloud.svg";
+import tree from "../assets/tree.svg";
+import speech from "../assets/speech.svg";
 ---
 
 <Layout>
@@ -22,26 +24,51 @@ import lilypadRight from "../assets/lilypad-right.svg";
   >
     <section
       class="
-        mx-auto flex h-screen w-screen flex-row gap-12 p-18 font-default
+        mx-auto h-screen w-screen font-default
         xl:max-w-450
       "
     >
-      <!-- Left Lilypad -->
-      <div class="relative w-1/2">
-        <img class="w-full" src={lilypadLeft.src} />
-        <p
-          id="description"
-          class="absolute inset-0 flex justify-center p-24 text-4xl/12"
-        >
-          {description}
-        </p>
+      <div class="flex h-[80%] flex-row gap-18 p-18">
+        <div class="relative w-1/2">
+          <img class="scale-115" src={cloud.src} />
+          <div id="description-wrapper" class="absolute top-40 left-20 flex">
+            <span id="description" class="text-4xl/12"></span>
+            <span id="cursor" class="m-0 inline-block text-black">|</span>
+          </div>
+        </div>
+        <div class="relative mt-32 w-1/2">
+          <img class="scale-120" src={cloud.src} />
+          <div class="
+            absolute inset-0 top-30 flex flex-col justify-center gap-4 px-12
+          ">
+            <p class="w-full text-2xl/8">{secondaryDescription}</p>
+            <!-- <div class="flex flex-row justify-center gap-4">
+              <ButtonWrapper id="learn-more" text="Learn More" />
+              <CalendlyButton />
+            </div> -->
+          </div>
+        </div>
       </div>
-      <!-- Right Lilypad -->
-      <div class="relative mt-32 w-1/2">
-        <img class="w-full" src={lilypadRight.src} />
-        <p class="absolute inset-0 flex justify-center p-24 text-2xl/8">
-          {secondaryDescription}
-        </p>
+      <div class="relative flex flex-row gap-4">
+        <div class="absolute -top-35 left-35 flex flex-row">
+          <img src={tree.src} class="w-50" />
+          <div class="relative">
+            <img src={speech.src} class="w-50 self-start" />
+            <button class="
+              absolute top-5 left-1/2 w-full -translate-x-1/2 cursor-pointer
+              text-xl
+            ">book consultation</button>
+          </div>
+        </div>
+        <div class="absolute top-4 left-100 flex flex-row">
+          <img src={tree.src} class="w-30" />
+          <div class="relative">
+            <img src={speech.src} class="w-50 self-start" />
+            <button id="learn-more" class="
+              absolute top-5 left-1/2 -translate-x-1/2 cursor-pointer text-xl
+            ">learn more</button>
+          </div>
+        </div>
       </div>
     </section>
     <!-- <Clients /> -->
