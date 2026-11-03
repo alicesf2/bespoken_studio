@@ -1,116 +1,106 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 import downArrow from "../assets/down-arrow.svg";
-import Clients from '../components/Clients.astro';
+import Clients from "../components/Clients.astro";
 import Projects from "../components/Projects.astro";
 import Services from "../components/Services.astro";
 import Faq from "../components/Faq.astro";
 import { description, secondaryDescription } from "../data/copy.ts";
-import CalendlyButton from '../components/CalendlyButton.astro';
-import ButtonWrapper from '../components/ButtonWrapper.astro';
+import CalendlyButton from "../components/CalendlyButton.astro";
+import ButtonWrapper from "../components/ButtonWrapper.astro";
+import lilypadLeft from "../assets/lilypad-left.svg";
+import lilypadRight from "../assets/lilypad-right.svg";
 ---
 
 <Layout>
-	<div class="
-   flex flex-col bg-[url('../assets/background.png')] bg-cover bg-center
-   bg-repeat
- ">
-		<section class="
-    mx-auto flex h-screen w-screen flex-col gap-80 p-18 font-default
-    xl:max-w-450
-  ">
-			<div class="relative">
-				<div class="
-      absolute h-60 w-250 rounded-2xl bg-dark-green px-8 py-6 outline-2
-    ">
-					<h1 class="font-default text-5xl/heading-none">{description}</h1>
-				</div>
-				<div class="
-      absolute top-5 left-5 h-60 w-250 rounded-2xl bg-mid-green px-8 py-6
-      outline-2
-    ">
-					<h1 class="font-default text-5xl/heading-none">{description}</h1>
-				</div>
-				<div id="description-wrapper" class="
-      absolute top-10 left-10 flex h-60 w-250 rounded-2xl bg-green px-8 py-6
-      outline-2
-    ">
-					<span id="description" class="font-default text-5xl/heading-none"></span>
-					<span id="cursor" class="m-0 inline-block text-black">|</span>
-				</div>
-			</div>
-			<div class="relative">
-				<div class="
-      absolute -right-10 flex max-w-250 flex-col gap-4 rounded-2xl px-8 py-6
-      outline-2
-    ">
-					<h3 class="font-default text-2xl/10">{secondaryDescription}</h3>
-					<div class="flex flex-row gap-4">
-						<ButtonWrapper id="learn-more" text="Learn more" class="
-        flex flex-row items-center justify-center gap-2
-      ">
-							<img src={downArrow.src} class="size-4"/>
-						</ButtonWrapper>
-						<CalendlyButton text="Book a free consultation"/>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!-- <Clients /> -->
-		<Services />
-		<Projects />
-		<Faq />
-	</div>
+  <div
+    class="
+      flex flex-col bg-[url('../assets/background.png')] bg-cover bg-center
+      bg-repeat
+    "
+  >
+    <section
+      class="
+        mx-auto flex h-screen w-screen flex-row gap-12 p-18 font-default
+        xl:max-w-450
+      "
+    >
+      <!-- Left Lilypad -->
+      <div class="relative w-1/2">
+        <img class="w-full" src={lilypadLeft.src} />
+        <p
+          id="description"
+          class="absolute inset-0 flex justify-center p-24 text-4xl/12"
+        >
+          {description}
+        </p>
+      </div>
+      <!-- Right Lilypad -->
+      <div class="relative mt-32 w-1/2">
+        <img class="w-full" src={lilypadRight.src} />
+        <p class="absolute inset-0 flex justify-center p-24 text-2xl/8">
+          {secondaryDescription}
+        </p>
+      </div>
+    </section>
+    <!-- <Clients /> -->
+    <Services />
+    <Projects />
+    <Faq />
+  </div>
 </Layout>
 
 <script>
-	import { gsap } from "gsap";
-	import { TextPlugin } from "gsap/TextPlugin";
-	import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-	import { description } from "../data/copy.ts";
+  import { gsap } from "gsap";
+  import { TextPlugin } from "gsap/TextPlugin";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+  import { description } from "../data/copy.ts";
 
-	gsap.registerPlugin(TextPlugin);
-	gsap.registerPlugin(ScrollToPlugin);
+  gsap.registerPlugin(TextPlugin);
+  gsap.registerPlugin(ScrollToPlugin);
 
-	// Blinking cursor animation
-	let cursor = document.querySelector("#cursor");
-	let descriptionEl = document.querySelector("#description");
+  // Blinking cursor animation
+  let cursor = document.querySelector("#cursor");
+  let descriptionEl = document.querySelector("#description");
 
-	gsap.fromTo(cursor, {autoAlpha: 0, x: 2}, {autoAlpha: 1, duration: 0.5, repeat: -1, ease: "steps(1)"});
+  gsap.fromTo(
+    cursor,
+    { autoAlpha: 0, x: 2 },
+    { autoAlpha: 1, duration: 0.5, repeat: -1, ease: "steps(1)" },
+  );
 
-	gsap.to("#description", {
-		text: {
-			value: description
-		}, 
-		duration: 5,
-		delay: 1, 
-		ease: "none",
-		onUpdate: () => descriptionEl?.appendChild(cursor)
-	})
+  gsap.to("#description", {
+    text: {
+      value: description,
+    },
+    duration: 5,
+    delay: 1,
+    ease: "none",
+    onUpdate: () => descriptionEl?.appendChild(cursor),
+  });
 
-	// Learn more scroll animation
-	const learnMoreBtn = document.getElementById("learn-more");
+  // Learn more scroll animation
+  const learnMoreBtn = document.getElementById("learn-more");
 
-	learnMoreBtn?.addEventListener("click", () => {
-		gsap.to(window, {
-			duration: 1,
-			scrollTo: "#services",
-			onComplete: () => {
-				gsap.set("#navbar", {
-					display: "block",
-					position: "fixed",
-					top: 0,
-					opacity: 0,
-				});
+  learnMoreBtn?.addEventListener("click", () => {
+    gsap.to(window, {
+      duration: 1,
+      scrollTo: "#services",
+      onComplete: () => {
+        gsap.set("#navbar", {
+          display: "block",
+          position: "fixed",
+          top: 0,
+          opacity: 0,
+        });
 
-				gsap.to("#navbar", {
-					opacity: 1,
-					duration: 0.5,
-					ease: "power2.out",
-				});
-			},
-		});
-	})
-	
+        gsap.to("#navbar", {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      },
+    });
+  });
 </script>

@@ -13,13 +13,15 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: "Poppins",
-      cssVariable: "--font-poppins",
+      name: "Redaction 35",
+      cssVariable: "--font-redaction-35",
     },
   ],
-  integrations: [sanity({
+  integrations: [
+    sanity({
       projectId: "jhxi82o7",
       dataset: "production",
       useCdn: false,
-  })],
+    }),
+  ],
 });

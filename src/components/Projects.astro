@@ -29,7 +29,7 @@ const projects = await sanityClient.fetch<Project[]>(PROJECTS_QUERY);
       mx-auto flex max-w-300 flex-col gap-8
       xl:max-w-400
     ">
-        <h3 class="w-fit rounded-2xl px-8 py-6 text-3xl outline-2">Past Projects</h3>
+        <h3 class="text-3xl underline decoration-wavy decoration-1">Past Projects</h3>
         <div class="grid grid-cols-3 gap-4">
             {projects.map((project: Project) => (
                 <a href={project.url} class="flex flex-col gap-2">

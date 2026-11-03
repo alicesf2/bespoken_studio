@@ -20,6 +20,6 @@ const faqs = await sanityClient.fetch<FAQ[]>(FAQ_QUERY);
   font-default
   2xl:max-w-400
 ">
-    <h3 class="w-fit rounded-2xl px-8 py-6 text-3xl outline-2">FAQ</h3>
+    <h3 class="text-3xl underline decoration-wavy decoration-1">FAQ</h3>
     <Accordion faqs={faqs} />
 </section>

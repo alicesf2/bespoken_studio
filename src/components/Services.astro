@@ -20,7 +20,7 @@ const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
 <section id="services" class="
   mx-auto mb-30 flex h-[calc(100vh-80px)] max-w-300 flex-col gap-12 font-default
 ">
-    <h3 class="mt-30 w-fit rounded-2xl px-8 py-6 text-3xl outline-2">Our Services</h3>
+    <h3 class="mt-30 text-3xl underline decoration-wavy decoration-1">Our Services</h3>
     <div class="flex flex-row gap-4">
         {services.map(service => (
             <div class="text-center">
