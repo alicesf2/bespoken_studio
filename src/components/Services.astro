@@ -27,7 +27,7 @@ const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
     ">our services</h3>
     <div class="flex flex-row">
         {services.map((service, i) => (
-            <div class={cx("text-center", i % 2 === 0 && "mt-48")}>
+            <div class={cx("animate-float text-center", i % 2 === 0 && "mt-48")}>
                 <SanityImage image={service.image} alt={service.imageAlt} class="
                   scale-60
                 " />

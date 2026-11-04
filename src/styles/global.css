@@ -4,12 +4,28 @@
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-default: var(--font-redaction-35);
+  --background-image-living-large: url("../assets/living-large.png");
+}
+
+@theme {
+  --animate-float: float 2s ease-in-out infinite;
   --color-light-green: #e0f7d3;
   --color-green: #b7e3ac;
   --color-mid-green: #698c60;
   --color-dark-green: #4c6745;
   --color-btn-green: #88b473;
-  --background-image-living-large: url("../assets/living-large.png");
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
 }

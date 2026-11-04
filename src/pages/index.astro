@@ -1,33 +1,45 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import {atom} from "nanostores";
 import "../styles/global.css";
 import downArrow from "../assets/down-arrow.svg";
 import Clients from "../components/Clients.astro";
 import Projects from "../components/Projects.astro";
 import Services from "../components/Services.astro";
 import Faq from "../components/Faq.astro";
-import { description, secondaryDescription } from "../data/copy.ts";
-import CalendlyButton from "../components/CalendlyButton.astro";
-import ButtonWrapper from "../components/ButtonWrapper.astro";
-import lilypadLeft from "../assets/lilypad-left.svg";
+import { secondaryDescription } from "../data/copy.ts";
+import duck from "../assets/duck.svg";
 import cloud from "../assets/cloud.svg";
 import tree from "../assets/tree.svg";
 import speech from "../assets/speech.svg";
+import sun from "../assets/sun.svg";
+import ButtonWrapper from "../components/ButtonWrapper.astro";
+import { cx } from "../lib/utils";
+import { isDark } from "../stores/main.js";
 ---
 
 <Layout>
   <div
+    id="background"
     class="
       flex flex-col bg-[url('../assets/background.png')] bg-cover bg-center
       bg-repeat
+      dark:bg-[url('../assets/background-dark.png')]
     "
   >
     <section
       class="
-        mx-auto h-screen w-screen font-default
+        relative mx-auto h-screen w-screen font-default
         xl:max-w-450
       "
     >
+      <button id="mode-btn">
+        <img src={sun.src} class="absolute top-2 right-0 w-50" />
+      </button>
+      <div class="absolute top-30 left-[55%] flex flex-col items-center gap-1">
+        <ButtonWrapper text="skip animation" />
+        <img src={duck.src} class="w-20" />
+      </div>
       <div class="flex flex-row gap-18 p-18">
         <div class="relative w-1/2">
           <img src={cloud.src} class="scale-105" />
@@ -42,10 +54,6 @@ import speech from "../assets/speech.svg";
             absolute inset-0 top-30 flex flex-col justify-center gap-4 px-12
           ">
             <p class="w-full text-2xl/8">{secondaryDescription}</p>
-            <!-- <div class="flex flex-row justify-center gap-4">
-              <ButtonWrapper id="learn-more" text="Learn More" />
-              <CalendlyButton />
-            </div> -->
           </div>
         </div>
       </div>
@@ -86,6 +94,15 @@ import speech from "../assets/speech.svg";
 
   gsap.registerPlugin(TextPlugin);
   gsap.registerPlugin(ScrollToPlugin);
+
+  // Dark mode handling
+  const background = document.getElementById("background");
+  const modeBtn = document.getElementById("mode-btn");
+
+  modeBtn?.addEventListener("click", () => {
+    console.log("sun clicked")
+    background?.classList.toggle("dark");
+  })
 
   // Blinking cursor animation
   let cursor = document.querySelector("#cursor");
