@@ -13,6 +13,8 @@ import cloud from "../assets/cloud.svg";
 import tree from "../assets/tree.svg";
 import speech from "../assets/speech.svg";
 import sun from "../assets/sun.svg";
+import moon from "../assets/moon.svg";
+import seabed from "../assets/seabed.svg";
 import ButtonWrapper from "../components/ButtonWrapper.astro";
 import { cx } from "../lib/utils";
 import { isDark } from "../stores/main.js";
@@ -22,8 +24,8 @@ import { isDark } from "../stores/main.js";
   <div
     id="background"
     class="
-      flex flex-col bg-[url('../assets/background.png')] bg-cover bg-center
-      bg-repeat
+      relative flex flex-col overflow-y-hidden
+      bg-[url('../assets/background.png')] bg-cover bg-center bg-repeat
       dark:bg-[url('../assets/background-dark.png')]
     "
   >
@@ -34,13 +36,20 @@ import { isDark } from "../stores/main.js";
       "
     >
       <!-- Dark mode toggle -->
-      <button id="mode-btn">
-        <img src={sun.src} class="absolute top-2 right-0 w-50" />
+      <button id="mode-btn" class="cursor-pointer">
+        <img id="sun" src={sun.src} class="
+          absolute top-2 right-2 w-50
+          dark:hidden
+        " />
+        <img id="moon" src={moon.src} class="
+          absolute top-2 right-2 hidden w-50
+          dark:block
+        " />
       </button>
 
       <!-- Skip animation button -->
       <div class="absolute top-30 left-[55%] flex flex-col items-center gap-1">
-        <ButtonWrapper text="skip animation" />
+        <ButtonWrapper id="skip-animation-btn" text="skip animation" />
         <img src={duck.src} class="w-20" />
       </div>
 
@@ -66,7 +75,7 @@ import { isDark } from "../stores/main.js";
         <!-- Left tree -->
         <div class="absolute -top-35 left-35 flex flex-row">
           <img src={tree.src} class="w-50" />
-          <div class="relative">
+          <div id="consultation-bubble" class="relative opacity-0">
             <img src={speech.src} class="w-50 self-start" />
             <button class="
               absolute top-5 left-1/2 w-full -translate-x-1/2 cursor-pointer
@@ -78,8 +87,8 @@ import { isDark } from "../stores/main.js";
         <!-- Right tree -->
         <div class="absolute top-4 left-100 flex flex-row">
           <img src={tree.src} class="w-30" />
-          <div class="relative">
-            <img src={speech.src} class="w-50 self-start" />
+          <div id="learn-more-bubble" class="relative opacity-0">
+            <img id="learn-more-bubble" src={speech.src} class="w-50 self-start" />
             <button id="learn-more" class="
               absolute top-5 left-1/2 -translate-x-1/2 cursor-pointer text-xl
             ">learn more</button>
@@ -91,6 +100,9 @@ import { isDark } from "../stores/main.js";
     <Services />
     <Projects />
     <Faq />
+    <img src={seabed.src} class="
+      absolute bottom-0 left-1/2 w-screen -translate-x-1/2 translate-y-10
+    "/>
   </div>
 </Layout>
 
@@ -108,14 +120,10 @@ import { isDark } from "../stores/main.js";
   const modeBtn = document.getElementById("mode-btn");
 
   modeBtn?.addEventListener("click", () => {
-    console.log("sun clicked")
     background?.classList.toggle("dark");
   })
 
   // Typewriter animations
-  let descriptionEl = document.querySelector("#description");
-  let descriptionEl2 = document.querySelector("#description2");
-
   let typewriterTl = gsap.timeline();
   typewriterTl.to("#description", {
     text: {
@@ -132,6 +140,22 @@ import { isDark } from "../stores/main.js";
     duration: 8,
     delay: 1,
     ease: "none",
+  })
+  .to("#consultation-bubble", {
+    opacity: 1,
+    duration: 1,
+    ease: "power1.in",
+  })
+  .to("#learn-more-bubble", {
+    opacity: 1,
+    duration: 1,
+    ease: "power1.in",
+  })
+
+  // Skip animation
+  const skipAnimationBtn = document.getElementById("skip-animation-btn");
+  skipAnimationBtn?.addEventListener("click", () => {
+    typewriterTl.progress(1);
   })
 
   // Learn more scroll animation

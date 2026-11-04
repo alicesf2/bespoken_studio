@@ -1,6 +1,10 @@
 ---
 import { sanityClient } from "sanity:client";
-import Accordion from "./Accordion.astro"
+import Accordion from "./Accordion.astro";
+import seaweed from "../assets/seaweed.svg";
+import jellyfish from "../assets/jellyfish.svg";
+import crab from "../assets/crab.svg";
+import speech from "../assets/speech.svg";
 
 export interface FAQ {
     question: string;
@@ -16,10 +20,40 @@ const faqs = await sanityClient.fetch<FAQ[]>(FAQ_QUERY);
 ---
 
 <section class="
-  mx-auto flex h-[calc(100vh-80px)] w-screen max-w-300 flex-col gap-8
-  font-default
+  mx-auto flex h-screen w-screen max-w-300 flex-col gap-8 font-default
   2xl:max-w-400
 ">
-    <h3 class="text-3xl underline decoration-wavy decoration-1">FAQ</h3>
+    <h3 class="text-center text-3xl underline decoration-wavy decoration-1">frequently asked questions</h3>
+    <img src={seaweed.src} class="z-100 -mb-15"/>
     <Accordion faqs={faqs} />
+    <div class="absolute bottom-30 left-100 flex flex-row gap-4">
+      <img src={jellyfish.src} class="w-20"/>
+      <div class="relative -mt-10">
+        <img src={speech.src} class="w-50 self-start" />
+        <button id="back-to-top-btn" class="
+          absolute top-5 left-1/2 w-full -translate-x-1/2 cursor-pointer text-xl
+        ">back to top</button>
+      </div>
+    </div>
+
+    <!-- Crab speech -->
+    <div class="absolute right-40 bottom-10 flex flex-row gap-4">
+      <img src={crab.src} class="z-100 w-40"/>
+      <div class="relative -mt-10">
+        <img src={speech.src} class="w-50 self-start" />
+        <button id="back-to-top-btn" class="
+          absolute top-5 left-1/2 w-full -translate-x-1/2 cursor-pointer text-xl
+        ">made by: alice fang</button>
+      </div>
+    </div>
 </section>
+
+<script>
+  const backToTopBtn = document.getElementById("back-to-top-btn");
+  backToTopBtn?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  });
+</script>
