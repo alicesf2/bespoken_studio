@@ -1,10 +1,10 @@
 ---
 import ButtonWrapper from "./ButtonWrapper.astro";
 
-const { text = "book consultation" } = Astro.props;
+const { text = "Book consultation" } = Astro.props;
 ---
 
-<ButtonWrapper id="consultation">{text}</ButtonWrapper>
+<ButtonWrapper class="consultation">{text}</ButtonWrapper>
 
 <script is:inline>
     const calendlyScript = document.createElement('script');
@@ -14,12 +14,14 @@ const { text = "book consultation" } = Astro.props;
 
 	calendlyScript.onload = () => {
 		if (window.Calendly) {
-            const consultationBtn = document.getElementById("consultation");
-            consultationBtn?.addEventListener("click", () => {
+            const consultationBtns = document.getElementsByClassName("consultation")
+            console.log(consultationBtns)
+            
+            Array.from(consultationBtns).forEach(btn => btn.addEventListener("click", () => {
                 Calendly.initPopupWidget({
                     url: 'https://calendly.com/alicesfang/bespoken-consultation'
                 });
-            })
+            }))
 		}
 	};
 

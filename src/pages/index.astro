@@ -10,8 +10,9 @@ import Faq from "../components/Faq.astro";
 import { secondaryDescription } from "../data/copy.ts";
 import duck from "../assets/duck.svg";
 import cloud from "../assets/cloud.svg";
-import tree from "../assets/tree.svg";
-import speech from "../assets/speech.svg";
+import treeLeft from "../assets/tree-left.svg";
+import treeRight from "../assets/tree-right.svg";
+import speech from "../assets/speech-bubble.png";
 import sun from "../assets/sun.svg";
 import moon from "../assets/moon.svg";
 import seabed from "../assets/seabed.svg";
@@ -48,16 +49,29 @@ import { isDark } from "../stores/main.js";
       </button>
 
       <!-- Skip animation button -->
-      <div class="absolute top-30 left-[55%] flex flex-col items-center gap-1">
-        <ButtonWrapper id="skip-animation-btn" text="skip animation" />
-        <img src={duck.src} class="w-20" />
+      <div class="absolute top-15 left-1/2 flex flex-row items-center gap-1">
+        <img src={duck.src} class="w-30" />
+        <button id="skip-animation-btn">
+          <div id="skip-animation-bubble" class="
+            relative top-10 flex cursor-pointer flex-col gap-2 opacity-0
+          ">
+            <img src={speech.src} class="w-50"/>
+            <div class="
+              absolute inset-0 left-[56%] flex w-full -translate-x-1/2 flex-col
+              gap-2 p-4 text-center
+            ">
+                <p class="text-xl">Skip animation</p>
+              </div>
+          </div>
+        </button>
+        
       </div>
 
       <div class="flex flex-row gap-18 p-18">
         <!-- Left cloud -->
         <div class="relative w-1/2">
           <img src={cloud.src} class="scale-105" />
-          <div class="absolute top-35 left-20 flex">
+          <div class="absolute top-20 left-15 flex">
             <span id="description" class="text-4xl/12"></span>
           </div>
         </div>
@@ -65,7 +79,7 @@ import { isDark } from "../stores/main.js";
         <!-- Right cloud -->
         <div class="relative mt-32 w-1/2">
           <img class="scale-120" src={cloud.src} />
-          <div class="absolute top-35 left-15 flex">
+          <div class="absolute top-20 left-5 flex">
             <span id="description2" class="text-2xl/8"></span>
           </div>
         </div>
@@ -73,36 +87,50 @@ import { isDark } from "../stores/main.js";
 
       <div class="relative flex flex-row gap-4">
         <!-- Left tree -->
-        <div class="absolute -top-35 left-35 flex flex-row">
-          <img src={tree.src} class="w-50" />
-          <div id="consultation-bubble" class="relative opacity-0">
-            <img src={speech.src} class="w-50 self-start" />
-            <button class="
-              absolute top-5 left-1/2 w-full -translate-x-1/2 cursor-pointer
-              text-xl
-            ">book consultation</button>
-          </div>
+        <div class="absolute -top-35 left-20 flex flex-row items-start">
+          <img src={treeLeft.src} class="w-85" />
+          <button class="consultation cursor-pointer">
+            <div id="consultation-bubble" class="
+              relative mt-8 -translate-x-8 opacity-0
+            ">
+              <img src={speech.src} class="w-60" />
+              <div class="
+                absolute inset-0 left-[56%] mt-2 flex w-full -translate-x-1/2
+                flex-col gap-2 p-4 text-center
+              ">
+                <p class="text-xl">Book consultation</p>
+              </div>
+            </div>
+          </button>
+          
         </div>
 
         <!-- Right tree -->
-        <div class="absolute top-4 left-100 flex flex-row">
-          <img src={tree.src} class="w-30" />
-          <div id="learn-more-bubble" class="relative opacity-0">
-            <img id="learn-more-bubble" src={speech.src} class="w-50 self-start" />
-            <button id="learn-more" class="
-              absolute top-5 left-1/2 -translate-x-1/2 cursor-pointer text-xl
-            ">learn more</button>
-          </div>
+        <div class="absolute -top-4 left-60 flex flex-row items-start">
+          <img src={treeRight.src} class="w-60" />
+          <button id="learn-more-btn" class="cursor-pointer">
+            <div id="learn-more-bubble" class="
+              relative mt-10 -translate-x-8 opacity-0
+            ">
+              <img src={speech.src} class="w-60 self-start" />
+              <div class="
+                absolute inset-0 left-[56%] mt-2 flex w-full -translate-x-1/2
+                flex-col gap-2 p-4 text-center
+              ">
+                <p class="text-xl">Learn more</p>
+              </div>
+            </div>
+          </button>
         </div>
       </div>
     </section>
     <!-- <Clients /> -->
     <Services />
-    <Projects />
-    <Faq />
-    <img src={seabed.src} class="
+    <!-- <Projects />
+    <Faq /> -->
+    <!-- <img src={seabed.src} class="
       absolute bottom-0 left-1/2 w-screen -translate-x-1/2 translate-y-10
-    "/>
+    "/> -->
   </div>
 </Layout>
 
@@ -133,6 +161,11 @@ import { isDark } from "../stores/main.js";
     delay: 1,
     ease: "none",
   })
+  .to("#skip-animation-bubble", {
+    opacity: 1,
+    duration: 1,
+    ease: "power1.in", 
+  }, "-=3")
   .to("#description2", {
     text: {
       value: secondaryDescription,
@@ -159,7 +192,7 @@ import { isDark } from "../stores/main.js";
   })
 
   // Learn more scroll animation
-  const learnMoreBtn = document.getElementById("learn-more");
+  const learnMoreBtn = document.getElementById("learn-more-btn");
 
   learnMoreBtn?.addEventListener("click", () => {
     gsap.to(window, {

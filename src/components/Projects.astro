@@ -8,6 +8,7 @@ interface Project {
     description: string;
     date: string;
     collaborator: string;
+    kicker: string;
     url: string;
     image: any;
     imageAlt: string;
@@ -16,7 +17,7 @@ interface Project {
 // Query projects from Sanity CMS
 const PROJECTS_QUERY = `*[
   _type == "project"
-]|order(date desc){collaborator, dark, date, description, image, imageAlt, name, url}`;
+]|order(date desc){collaborator, dark, date, description, kicker, image, imageAlt, name, url}`;
 
 const projects = await sanityClient.fetch<Project[]>(PROJECTS_QUERY);
 ---
@@ -29,14 +30,28 @@ const projects = await sanityClient.fetch<Project[]>(PROJECTS_QUERY);
       mx-auto flex max-w-300 flex-col gap-8
       xl:max-w-400
     ">
-        <h3 class="text-3xl underline decoration-wavy decoration-1">projects</h3>
-        <div class="flex flex-row gap-8">
+        <h3 class="text-center text-3xl underline decoration-wavy decoration-1">Featured Projects</h3>
+        <div class="flex flex-row items-stretch gap-8">
             {projects.map((project: Project) => (
-                <a href={project.url} class="flex flex-col gap-2">
+                <a href={project.url} class="group flex flex-1 flex-col gap-2">
+                  {/* Oval window container */}
+                  <div class="relative aspect-1159/2271 w-full">
                     <SanityImage image={project.image} alt={project.imageAlt} class="
-                      rounded-full border border-[#16180A]
+                      absolute inset-0 size-full rounded-full object-cover
                     "/>
-                    <p class="text-center text-xl">{project.name}</p>
+                    {/* Project description overlay */}
+                    <div class="
+                      absolute inset-0 flex items-center justify-center
+                      rounded-full bg-white/20 p-8 opacity-0 shadow-lg
+                      backdrop-blur-2xl transition-opacity duration-300
+                      group-hover:opacity-100
+                    ">
+                    {project.description}
+                  </div>
+                  </div>
+                   <p class="text-center text-xl">{project.name}</p>
+                   <p class="text-center text-sm italic">{project.collaborator}</p>
+                   <p>{project.kicker}</p>
                 </a>
             ))}
         </div>

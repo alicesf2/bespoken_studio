@@ -20,23 +20,22 @@ const services = await sanityClient.fetch<Service[]>(SERVICES_QUERY);
 ---
 
 <section id="services" class="
-  mx-auto mb-30 flex h-screen max-w-300 flex-col gap-12 font-default
+  mx-auto mb-30 flex h-[calc(100vh-80px)] max-w-300 flex-col gap-12 font-default
 ">
     <h3 class="
       mt-30 text-center text-3xl underline decoration-wavy decoration-1
-    ">our services</h3>
-    <div class="flex flex-row">
+    ">Our Services</h3>
+    <div class="flex aspect-square flex-col gap-8 rounded-full bg-blue-400 p-12">
         {services.map((service, i) => {
-          const isEven = i % 2 === 0;
-
           return (
-            <div class={cx("animate-float text-center", isEven && "mt-48")}>
-                {!isEven && <p>{service.description}</p>}
+            <div class="flex flex-row gap-12">
                 <SanityImage image={service.image} alt={service.imageAlt} class="
-                  scale-60
+                  w-30 flex-1
                 " />
-                <p class="-mt-12 text-lg">{service.name}</p>
-                {isEven && <p>{service.description}</p>}
+               <div class="flex flex-col gap-2">
+                <p class="text-2xl font-semibold capitalize">{service.name}</p>
+                <p class="text-xl">{service.description}</p>
+              </div>
             </div>
           )
         })}
