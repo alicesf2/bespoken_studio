@@ -1,6 +1,7 @@
 ---
 import { sanityClient } from "sanity:client";
 import SanityImage from "../components/SanityImage.astro"
+import shark from "../assets/shark.svg";
 
 interface Project {
     name: string;
@@ -27,11 +28,12 @@ const projects = await sanityClient.fetch<Project[]>(PROJECTS_QUERY);
   2xl:max-w-400
 ">
     <div class="
-      mx-auto flex max-w-300 flex-col gap-8
+      relative mx-auto flex max-w-300 flex-col gap-8
       xl:max-w-400
     ">
-        <h3 class="text-center text-3xl underline decoration-wavy decoration-1">Featured Projects</h3>
-        <div class="flex flex-row items-stretch gap-8">
+        <!-- <h3 class="text-center text-3xl underline decoration-wavy decoration-1">Featured Projects</h3> -->
+        <img src={shark.src} class="mt-80 translate-x-50 scale-250"/>
+        <div class="absolute top-100 flex flex-row items-stretch gap-8">
             {projects.map((project: Project) => (
                 <a href={project.url} class="group flex flex-1 flex-col gap-2">
                   {/* Oval window container */}
