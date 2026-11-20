@@ -24,7 +24,7 @@ export default defineConfig({
           },
           {
             src: ["./src/assets/fonts/more-sugar.thin.otf"],
-            weight: "thin",
+            weight: 300,
             style: "normal",
           },
         ],
