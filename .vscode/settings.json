@@ -1,7 +1,6 @@
 {
-  // Globally turn on format on save
   "editor.formatOnSave": true,
-
-  // Set Prettier as the default for standard files (JS, TS, JSON)
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

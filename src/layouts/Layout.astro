@@ -1,42 +1,43 @@
 ---
 import "../styles/global.css";
-import { Font } from "astro:assets"
-import Nav from "../components/Nav.astro"
-const bgColor = "#504831"
+import { Font } from "astro:assets";
+import Nav from "../components/Nav.astro";
+const bgColor = "#504831";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<link
-			href="https://assets.calendly.com/assets/external/widget.css"
-			rel="stylesheet"
-		/>
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-		<Font cssVariable="--font-redaction-35" />
-	</head>
-	<body>
-		<Nav />
-		<main>
-			<slot />
-		</main>
-		<script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      href="https://assets.calendly.com/assets/external/widget.css"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+    <Font cssVariable="--font-more-sugar" />
+  </head>
+  <body class="bg-yellow">
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
+  </body>
 </html>
 
 <style>
-	html, body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-	}
-	main {
-		margin: 0 auto;
-		height: 100%;
-	}
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  main {
+    margin: 0 auto;
+    height: 100%;
+  }
 </style>

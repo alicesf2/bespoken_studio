@@ -12,9 +12,23 @@ export default defineConfig({
   base: "/",
   fonts: [
     {
-      provider: fontProviders.fontsource(),
-      name: "Redaction 35",
-      cssVariable: "--font-redaction-35",
+      provider: fontProviders.local(),
+      name: "More Sugar",
+      cssVariable: "--font-more-sugar",
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/more-sugar.regular.otf"],
+            weight: "normal",
+            style: "normal",
+          },
+          {
+            src: ["./src/assets/fonts/more-sugar.thin.otf"],
+            weight: "thin",
+            style: "normal",
+          },
+        ],
+      },
     },
   ],
   integrations: [

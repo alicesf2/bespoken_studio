@@ -1,0 +1,215 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {atom} from "nanostores";
+import "../styles/global.css";
+import downArrow from "../assets/down-arrow.svg";
+import Clients from "../components/Clients.astro";
+import Projects from "../components/Projects.astro";
+import Services from "../components/Services.astro";
+import Faq from "../components/Faq.astro";
+import { secondaryDescription } from "../data/copy.ts";
+import duck from "../assets/duck.svg";
+import cloud from "../assets/cloud.svg";
+import treeLeft from "../assets/tree-left.svg";
+import treeRight from "../assets/tree-right.svg";
+import speech from "../assets/speech-bubble.png";
+import sun from "../assets/sun.svg";
+import moon from "../assets/moon.svg";
+import seabed from "../assets/seabed.svg";
+import ButtonWrapper from "../components/ButtonWrapper.astro";
+import { cx } from "../lib/utils";
+import { isDark } from "../stores/main.js";
+---
+
+<Layout>
+  <div
+    id="background"
+    class="
+      relative flex flex-col overflow-y-hidden
+      bg-[url('../assets/background.png')] bg-cover bg-center bg-repeat
+      dark:bg-[url('../assets/background-dark.png')]
+    "
+  >
+    <section
+      class="
+        relative mx-auto h-screen w-screen font-default
+        xl:max-w-450
+      "
+    >
+      <!-- Dark mode toggle -->
+      <button id="mode-btn" class="cursor-pointer">
+        <img id="sun" src={sun.src} class="
+          absolute top-2 right-2 w-50
+          dark:hidden
+        " />
+        <img id="moon" src={moon.src} class="
+          absolute top-2 right-2 hidden w-50
+          dark:block
+        " />
+      </button>
+
+      <!-- Skip animation button -->
+      <div class="absolute top-15 left-1/2 flex flex-row items-center gap-1">
+        <img src={duck.src} class="w-30" />
+        <button id="skip-animation-btn">
+          <div id="skip-animation-bubble" class="
+            relative top-10 flex cursor-pointer flex-col gap-2 opacity-0
+          ">
+            <img src={speech.src} class="w-50"/>
+            <div class="
+              absolute inset-0 left-[56%] flex w-full -translate-x-1/2 flex-col
+              gap-2 p-4 text-center
+            ">
+                <p class="text-xl">Skip animation</p>
+              </div>
+          </div>
+        </button>
+        
+      </div>
+
+      <div class="flex flex-row gap-18 p-18">
+        <!-- Left cloud -->
+        <div class="relative w-1/2">
+          <img src={cloud.src} class="scale-105" />
+          <div class="absolute top-20 left-15 flex">
+            <span id="description" class="text-4xl/12"></span>
+          </div>
+        </div>
+
+        <!-- Right cloud -->
+        <div class="relative mt-32 w-1/2">
+          <img class="scale-120" src={cloud.src} />
+          <div class="absolute top-20 left-5 flex">
+            <span id="description2" class="text-2xl/8"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative flex flex-row gap-4">
+        <!-- Left tree -->
+        <div class="absolute -top-35 left-20 flex flex-row items-start">
+          <img src={treeLeft.src} class="w-85" />
+          <button class="consultation cursor-pointer">
+            <div id="consultation-bubble" class="
+              relative mt-8 -translate-x-8 opacity-0
+            ">
+              <img src={speech.src} class="w-60" />
+              <div class="
+                absolute inset-0 left-[56%] mt-2 flex w-full -translate-x-1/2
+                flex-col gap-2 p-4 text-center
+              ">
+                <p class="text-xl">Book consultation</p>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- Right tree -->
+        <div class="absolute -top-4 left-60 flex flex-row items-start">
+          <img src={treeRight.src} class="w-60" />
+          <button id="learn-more-btn" class="cursor-pointer">
+            <div id="learn-more-bubble" class="
+              relative mt-10 -translate-x-8 opacity-0
+            ">
+              <img src={speech.src} class="w-60 self-start" />
+              <div class="
+                absolute inset-0 left-[56%] mt-2 flex w-full -translate-x-1/2
+                flex-col gap-2 p-4 text-center
+              ">
+                <p class="text-xl">Learn more</p>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+    <Services />
+    <Projects />
+    <Faq />
+    <!-- <img src={seabed.src} class="
+      absolute bottom-0 left-1/2 w-screen -translate-x-1/2 translate-y-10
+    "/> -->
+  </div>
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import { TextPlugin } from "gsap/TextPlugin";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+  import { description, secondaryDescription } from "../data/copy.ts";
+
+  gsap.registerPlugin(TextPlugin);
+  gsap.registerPlugin(ScrollToPlugin);
+
+  // Dark mode handling
+  const background = document.getElementById("background");
+  const modeBtn = document.getElementById("mode-btn");
+
+  modeBtn?.addEventListener("click", () => {
+    background?.classList.toggle("dark");
+  })
+
+  // Typewriter animations
+  let typewriterTl = gsap.timeline();
+  typewriterTl.to("#description", {
+    text: {
+      value: description,
+    },
+    duration: 5,
+    delay: 1,
+    ease: "none",
+  })
+  .to("#skip-animation-bubble", {
+    opacity: 1,
+    duration: 1,
+    ease: "power1.in", 
+  }, "-=3")
+  .to("#description2", {
+    text: {
+      value: secondaryDescription,
+    },
+    duration: 8,
+    delay: 1,
+    ease: "none",
+  })
+  .to("#consultation-bubble", {
+    opacity: 1,
+    duration: 1,
+    ease: "power1.in",
+  })
+  .to("#learn-more-bubble", {
+    opacity: 1,
+    duration: 1,
+    ease: "power1.in",
+  })
+
+  // Skip animation
+  const skipAnimationBtn = document.getElementById("skip-animation-btn");
+  skipAnimationBtn?.addEventListener("click", () => {
+    typewriterTl.progress(1);
+  })
+
+  // Learn more scroll animation
+  const learnMoreBtn = document.getElementById("learn-more-btn");
+
+  learnMoreBtn?.addEventListener("click", () => {
+    gsap.to(window, {
+      duration: 1,
+      scrollTo: "#services",
+      onComplete: () => {
+        gsap.set("#navbar", {
+          display: "block",
+          position: "fixed",
+          top: 0,
+          opacity: 0,
+        });
+
+        gsap.to("#navbar", {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      },
+    });
+  });
+</script>

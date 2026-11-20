@@ -1,30 +1,30 @@
 ---
 import ButtonWrapper from "./ButtonWrapper.astro";
 
-const { text = "Book consultation" } = Astro.props;
+const { text = "book consultation" } = Astro.props;
 ---
 
-<ButtonWrapper class="consultation">{text}</ButtonWrapper>
+<ButtonWrapper class="consultation text-xl">{text}</ButtonWrapper>
 
 <script is:inline>
-    const calendlyScript = document.createElement('script');
+  const calendlyScript = document.createElement("script");
 
-	calendlyScript.src = 'https://assets.calendly.com/assets/external/widget.js';
-	calendlyScript.async = true;
+  calendlyScript.src = "https://assets.calendly.com/assets/external/widget.js";
+  calendlyScript.async = true;
 
-	calendlyScript.onload = () => {
-		if (window.Calendly) {
-            const consultationBtns = document.getElementsByClassName("consultation")
-            console.log(consultationBtns)
-            
-            Array.from(consultationBtns).forEach(btn => btn.addEventListener("click", () => {
-                Calendly.initPopupWidget({
-                    url: 'https://calendly.com/alicesfang/bespoken-consultation'
-                });
-            }))
-		}
-	};
+  calendlyScript.onload = () => {
+    if (window.Calendly) {
+      const consultationBtns = document.getElementsByClassName("consultation");
 
-	document.head.appendChild(calendlyScript);
-	
+      Array.from(consultationBtns).forEach((btn) =>
+        btn.addEventListener("click", () => {
+          Calendly.initPopupWidget({
+            url: "https://calendly.com/alicesfang/bespoken-consultation",
+          });
+        }),
+      );
+    }
+  };
+
+  document.head.appendChild(calendlyScript);
 </script>
