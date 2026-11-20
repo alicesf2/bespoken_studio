@@ -14,10 +14,8 @@
 @theme {
   --animate-float: float 2s ease-in-out infinite;
   --color-light-green: #e0f7d3;
-  --color-green: #b7e3ac;
-  --color-mid-green: #698c60;
+  --color-green: #698c60;
   --color-dark-green: #4c6745;
-  --color-btn-green: #88b473;
   --color-yellow: #fff3c2;
 
   @keyframes float {

@@ -1,10 +1,16 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
+import { secondaryDescription } from "../data/copy";
+import smallBiz from "../assets/small-biz.svg";
 ---
 
 <Layout>
-  <section class="font-default">
-    <h1>Bespoken Studio</h1>
+  <section class="font-default flex flex-col items-center justify-center">
+    <div class="flex flex-col gap-4 items-center justify-center w-[95%] mx-auto p-12">
+      <img src={smallBiz.src} class="w-70" />
+      <p class="text-[70px] font-thin">small websites for small businesses.</p>
+      <p class="text-4xl">{secondaryDescription}</p>
+    </div>
   </section>
 </Layout>

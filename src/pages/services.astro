@@ -1,0 +1,48 @@
+---
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  {
+    name: "design",
+    description:
+      "high-fidelity mockups of the website for desktop and mobile layouts",
+    timeline: "1 week",
+    price: 250,
+  },
+  {
+    name: "development",
+    description: `coding the website and publishing it to the web. includes configuration of content management
+                  system and design tweaks as necessary.`,
+    timeline: "2-3 weeks",
+    price: 500,
+  },
+  {
+    name: "seo & analytics",
+    description: `hooking up services like google analytics to track metrics across the
+                  site, and improving online visibility and traffic`,
+    timeline: "1 week",
+    price: 100,
+  },
+  {
+    name: "special build",
+    description: `anything highly interactive, including but not limited to animations,
+                  custom layouts, media, games, etc.`,
+    timeline: "variable",
+    price: -1,
+  },
+];
+---
+
+<Layout>
+  <section class="flex flex-row gap-8 font-default p-12">
+    {services.map((service) => (
+      <div>
+        <h1>{service.name}</h1>
+        <p>{service.description}</p>
+        <p>timeline: {service.timeline}</p>
+        <p>price: {service.price === -1 ? "variable" : `$${service.price}`}</p>
+      </div>
+    ))}
+  </section>
+</Layout>

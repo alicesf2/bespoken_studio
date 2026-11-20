@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import alice from "../assets/alice.jpg";
+---
+
+<Layout>
+  <section class="font-default flex flex-col gap-4 justify-center items-center w-[95%] mx-auto p-12">
+    <div class="flex flex-row gap-12 items-start">
+      <div class="flex w-1/3 flex-col gap-8 items-center">
+        <img src={alice.src} class="w-50 rounded-full" />
+        <div class="text-xl bg-white/30 shadow-lg backdrop-blur-2xl rounded-3xl p-8">
+          <h1 class="text-center underline decoration-1 underline-offset-3">
+            our (small) toolkit
+          </h1>
+          <ul class="list-disc ml-4">
+            <li>design & assets: canva</li>
+            <li>development: astro, tailwindcss & flowbite, typescript</li>
+            <li>content management: sanity cms</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex w-2/3 flex-col gap-4">
+        <p class="text-3xl text-center">
+          hi, i'm alice and i'm the founder of bespoken.
+        </p>
+        <p class="text-2xl">
+          bespoken was born out of a desire to bring creativity and
+          one-of-a-kind, aka bespoke, qualities back to an industry that is
+          increasingly focused on optimization and automation at-scale.
+        </p>
+        <p class="text-2xl">
+          bespoken is intentionally small and community-oriented. our clients
+          are businesses we frequent regularly and people who are making a
+          difference in their communties.
+        </p>
+        <p class="text-2xl">
+          it might sound weird that we pride ourselves on doing small work, when
+          technology can reach massive audiences and make widespread change. we
+          believe that change starts within ourselves, the way we work, and our
+          surroundings. that's why we refuse to use AI in our creative process.
+          we want the human-to-human conversations, the iterative design
+          process, and the enjoyment of writing code from scratch. we do
+          occasionally use AI to debug small pieces of code, as we believe this
+          doesn't inhibit our enjoyment and understanding of our work.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
